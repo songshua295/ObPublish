@@ -1,0 +1,34 @@
+baseURL = "https://garden.oldwinter.top/"  #需要进行配置成你的网站域名，此处配置了才可以使用搜索功能
+languageCode = "en" #此处可选，在i18n中选择
+googleAnalytics = "G-11MD77L81V"
+relativeURLs = false
+disablePathToLower = true
+ignoreFiles = [
+    "/content/templates/*",
+    "/content/private/*",
+]
+summaryLength = 20
+paginate = 10
+enableGitInfo = true
+
+[markup]
+    [markup.tableOfContents]
+        endLevel = 3
+        ordered = true
+        startLevel = 2
+    [markup.highlight]
+        noClasses = false
+        anchorLineNos = false
+        codeFences = true
+        guessSyntax = true
+        hl_Lines = ""
+        lineAnchors = ""
+        lineNoStart = 1
+        lineNos = true
+        lineNumbersInTable = true
+        style = "dracula"
+    [frontmatter]
+        lastmod = ["date modified","lastmod", ":git", "date", "publishDate"]
+        publishDate = ["date created","publishDate", "date"]
+    [markup.goldmark.renderer]
+        unsafe = true
