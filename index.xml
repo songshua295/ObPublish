@@ -36,4 +36,4 @@ excalibrain自动生成的文件</description></item><item><title>∑ MOCs</titl
 说到 Markdown， 可能已经是很多朋友熟悉的一种记录语言了。在互联网时代，Markdown 被广泛普及运用。很多人用 Markdown 写博客，写日志，写备忘，网上也有一堆支持 Markdown 的写作工具，例如：熊掌记（bear），ia Writer， Ulysses， Day One，甚至 印象笔记 也在近几年开始支持 Markdown 语法。对于不少追求效率的朋友来说，Markdown 是近来文字记录领域中难以忽视的方案。</description></item><item><title>链接测试test2</title><link>https://ob.tianzhongs.ml/test2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/test2/</guid><description>图片测试 图片测试
 标准markdwon ！【】（） 相对路径 基于仓库目录 直接使用文件名称 图片测试2‘ wiki语法 ![[asset/Pasted image 20220916174257.png]]
 连接其他页面 标准语法 【】（）
-» 本库常用的dataview工作流 显示其他页面！【】（） wiki语法 [[]] [[test]] !</description></item></channel></rss>
+» 本库常用的dataview工作流 显示其他页面！【】（） wiki语法 [[]] [[test]]</description></item></channel></rss>
