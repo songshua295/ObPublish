@@ -24,24 +24,25 @@
 <!-- 引入 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js">
-    </script>
+</script>
+<!-- 解决issue的label长度不能超过五十的问题 -->
+<script src="alittlejs/md5.min.js"></script>
+<!-- 添加一个容器-->
+<div id="gitalk-container"></div>
 
-    <!-- 添加一个容器-->
-    <div id="gitalk-container"></div>
+<!-- 生成 gitalk 插件-->
+<script>
+    var gitalk = new Gitalk({
+        clientID: 'b3d1e82d398c36a4a587', //Client ID 自己配置
 
-    <!-- 生成 gitalk 插件-->
-    <script>
-        var gitalk = new Gitalk({
-            clientID: 'b3d1e82d398c36a4a587', //Client ID 自己配置
+        clientSecret: '973b351e5ad4ff9ea6d93e7db3f431beef48dc2d', //Client Secret 自己配置
 
-            clientSecret: '973b351e5ad4ff9ea6d93e7db3f431beef48dc2d', //Client Secret 自己配置
+        repo: 'ObPublish',//仓库名称  自己配置
+        owner: 'tianzhongs',//仓库拥有者  自己配置
+        admin: ['Tianzhongs'],
+        id: location.href,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
 
-            repo: 'ObPublish',//仓库名称  自己配置
-            owner: 'tianzhongs',//仓库拥有者  自己配置
-            admin: ['Tianzhongs'],
-            id: location.href,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: false  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
+    gitalk.render('gitalk-container')
+</script>
