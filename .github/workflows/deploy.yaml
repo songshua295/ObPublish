@@ -21,8 +21,8 @@ jobs:
       # - name: config1 
       #   run: rm -rf content/.obsidian content/cedict_ts.u8 content/Extras/Templates  && mv content/*.md content/Atlas && find content/ -name "*.md" | xargs -I file  mv -f file content &&  mv content/AboutTheGarden.md content/_index.md 
       #尝试修改一下工作流
-      # - name: config1 
-      #   run: rm -rf content/.obsidian content/cedict_ts.u8 content/Extras/Templates  && mv content/*.md content/Atlas && find content/ -name "*.md" | xargs -I file  mv -f file content &&  mv content/AboutTheGarden.md content/_index.md 
+      - name: config1 
+        run: rm -rf content/.obsidian  && find content/ -name "*.md" | xargs -I file  mv -f file content &&  mv content/AboutTheGarden.md content/_index.md 
       
       - name: config2
         run: "ls content/ && grep -lr --null 'title' content/* | xargs -0 sed -i -E -r 's/title: (.*)/title: \"\\1\"/g'"
