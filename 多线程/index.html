@@ -1,0 +1,1327 @@
+<!doctype html><html lang=en><head><script async defer data-website-id=08a754c4-6690-46d7-bb80-8ff93cfa232f src=https://umami.oldwinter.top/umami.js></script><meta charset=utf-8><meta name=description content="多线程 Created: August 4, 2022 8:42 AM Date: August 4, 2022 类别: 多线程
+书写注意点 方法一 继承  编写一个类，继承Thread（java.lang.Thread），重写run方法 启动线程：在main中new对象，然后使用线程的start()，开辟线程栈空间  方法二 实现 建议 采用这种方式，面向接口编程，更灵活，只能继承一个类，但是接口没有限制"><title>🌿 我的知识花园🌸</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://ob.tianzhongs.ml//icon.png><link href=https://ob.tianzhongs.ml/styles.b3e1e36b0403ac565c9392b3e23ef3b6.min.css rel=stylesheet><link href=https://ob.tianzhongs.ml/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://ob.tianzhongs.ml/js/darkmode.39c2c88b3447f5b3d88347763905ade7.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://ob.tianzhongs.ml/js/popover.abe6a51cc7138c5dff00f151dd627ad1.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://ob.tianzhongs.ml/",fetchData=Promise.all([fetch("https://ob.tianzhongs.ml/indices/linkIndex.b78c6e65640add7c78c4e21c3a292c2f.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://ob.tianzhongs.ml/indices/contentIndex.c8286c18a38a64dc291659efb191ac7b.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://ob.tianzhongs.ml",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://ob.tianzhongs.ml",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-11MD77L81V"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-11MD77L81V",{anonymize_ip:!1})}</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=search placeholder=支持标题及全文搜索...><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://ob.tianzhongs.ml/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://ob.tianzhongs.ml/>🌿 我的知识花园🌸</a></h1><div class=spacer></div><div id=search-icon><p>search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><p class=meta>最近编辑于
+Unknown</p><ul class=tags></ul><aside class=mainTOC><details><summary>目录</summary><nav id=TableOfContents><ol><li><a href=#方法一-继承多线程md>方法一 <a href=%E5%A4%9A%E7%BA%BF%E7%A8%8B.md>继承</a></a></li><li><a href=#方法二-实现多线程md--建议>方法二 <a href=%E5%A4%9A%E7%BA%BF%E7%A8%8B.md>实现</a> 建议</a></li><li><a href=#方法三-实现callable接口-带有返回值多线程md>方法三 <a href=%E5%A4%9A%E7%BA%BF%E7%A8%8B.md>实现<code>Callable</code>接口 带有返回值</a></a></li></ol><ol><li><a href=#解释>解释</a></li><li><a href=#线程生命周期图>线程生命周期图</a></li><li><a href=#生活举例理解>生活举例理解</a><ol><li><a href=#真正的多线程>真正的多线程</a></li></ol></li><li><a href=#举例>举例</a></li></ol><ol><li><a href=#eg1-采用extends的方式>eg1 采用extends的方式</a></li><li><a href=#eg2-采用implements的方式-推荐这种方式>eg2 采用<code>implements</code>的方式 推荐这种方式</a></li><li><a href=#eg3-implements结合匿名内部类的方式>eg3 implements结合匿名内部类的方式</a></li><li><a href=#eg4-实现callable接口的方式>eg4 实现Callable接口的方式</a></li></ol><ol><li><a href=#eg1-静态方法-threadsleep>eg1 静态方法 Thread.sleep()</a></li><li><a href=#eg2-thread面试题>eg2 Thread面试题</a></li><li><a href=#eg3-终止线程的睡眠叫醒线程不让它睡眠interrupt>eg3 终止线程的睡眠（叫醒线程，不让它睡眠）:<code>.interrupt()</code></a></li><li><a href=#eg4-终止线程的执行1---stop不建议-不会保存数据>eg4 终止线程的执行1 stop()不建议 不会保存数据</a></li><li><a href=#eg5-良好的终止线程>eg5 良好的终止线程</a></li><li><a href=#eg6-守护线程>eg6 守护线程</a></li></ol><ol><li><a href=#分类>分类</a></li><li><a href=#线程调度-有关的方法>线程调度 有关的方法</a><ol><li><a href=#设置线程优先级>设置线程优先级</a></li><li><a href=#让位>让位</a></li><li><a href=#线程合并-join>线程合并 join</a></li></ol></li></ol><ol><li><a href=#书写注意点-1>书写注意点：</a></li><li><a href=#三种写法>三种写法</a></li><li><a href=#原理>原理</a></li><li><a href=#相关>相关</a><ol><li><a href=#相关编程模型>相关：编程模型</a></li></ol></li><li><a href=#线程安全eg>线程安全eg</a><ol><li><a href=#eg1-线程安全问题两个线程对同一个账户进行访问>eg1 线程安全问题：两个线程对同一个账户进行访问</a></li></ol></li></ol><ol><li><a href=#书写注意点-2>书写注意点</a></li><li><a href=#eg1>eg1</a></li></ol><ol><li><a href=#作用>作用</a></li><li><a href=#方法作用>方法作用</a><ol><li><a href=#解释wait和notify>解释wait和notify</a></li></ol></li><li><a href=#eg1-生产者和消费者问题>eg1 生产者和消费者问题</a></li></ol></nav></details></aside><a href=#多线程><h1 id=多线程><span class=hanchor arialabel=Anchor># </span>多线程</h1></a><p>Created: August 4, 2022 8:42 AM
+Date: August 4, 2022
+类别: 多线程</p><a href=#书写注意点><h1 id=书写注意点><span class=hanchor arialabel=Anchor># </span>书写注意点</h1></a><h2 id=方法一-继承多线程md>方法一
+<a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>继承</a></h2><ol><li>编写一个类，<strong>继承</strong><code>Thread</code>（java.lang.Thread），<strong>重写<code>run</code>方法</strong></li><li>启动线程：在main中new对象，然后使用线程的<code>start()</code>，开辟线程栈空间</li></ol><h2 id=方法二-实现多线程md--建议>方法二
+<a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>实现</a> 建议</h2><p>采用这种方式，面向接口编程，更灵活，只能继承一个类，但是接口没有限制</p><ol><li>编写一个类A，<strong>实现</strong><code>java.lang.Runnable</code>接口，实现<code>run</code> 方法</li><li>启动线程：new一个<code>Thread</code>对象，再new一个A对象，把new的A对象作为参数传进去，使用<code>Thread</code>对象的<code>start()</code>启动线程</li></ol><h2 id=方法三-实现callable接口-带有返回值多线程md>方法三
+<a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>实现<code>Callable</code>接口 带有返回值</a></h2><ol><li>优点：带有返回值</li><li>缺点：使用<code>get()</code>方法获取返回值时，会导致当前线程产生阻塞，因为需要等待另一个线程返回值</li></ol><a href=#进程与线程><h1 id=进程与线程><span class=hanchor arialabel=Anchor># </span>进程与线程</h1></a><a href=#解释><h2 id=解释><span class=hanchor arialabel=Anchor># </span>解释</h2></a><p>进程：相当于一个<strong>应用程序</strong></p><p>线程：<strong>一个进程中的执行单元</strong></p><p>一个<strong>进程可以执行多个线程</strong></p><p>在Java语言中，线程之间可以共享堆内存和方法区，但是<strong>线程栈内存独立，一个线程一个栈</strong></p><p>多线程的作用：<strong>提高程序处理效率</strong>（在Java看有没有采用多线程，最简单的方法就是看有没有开辟新的栈）</p><a href=#线程生命周期图><h2 id=线程生命周期图><span class=hanchor arialabel=Anchor># </span>线程生命周期图</h2></a><p><img src=https://ob.tianzhongs.ml//asset/Untitled.png width=auto alt=Untitled></p><a href=#生活举例理解><h2 id=生活举例理解><span class=hanchor arialabel=Anchor># </span>生活举例理解</h2></a><p>接力比赛，一个人跑到400米，就换另一个跑，因为没有各自跑各自的效率没有得到提升，单线程</p><p>做作业，为了能够写快点，让另一个朋友帮忙一起写，都在写，但是互不干扰对方写作业，多线程</p><a href=#真正的多线程><h3 id=真正的多线程><span class=hanchor arialabel=Anchor># </span>真正的多线程</h3></a><p>一个线程只执行自己的线程，每个线程之间不干扰，t1只执行t1，t2只执行2，就叫多线程</p><p>而<strong>单核CPU</strong>不能真正的实现多线程，因为只有一个大脑，但是可以通过<strong>频繁切换线程</strong>来给人一个多线程的错觉（计算机的计算速度很快，人类感受不出来）</p><a href=#举例><h2 id=举例><span class=hanchor arialabel=Anchor># </span>举例</h2></a><p>多线程举例：IDM下载，采用多线程下载</p><p>多进程：Chrome浏览器，每次打开一个网站，都会新建一个进程</p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%201.png width=auto alt=在任务管理中列举的就是进程></p><p>在任务管理中列举的就是进程</p><a href=#基本使用方法><h1 id=基本使用方法><span class=hanchor arialabel=Anchor># </span>基本使用方法</h1></a><a href=#eg1-采用extends的方式><h2 id=eg1-采用extends的方式><span class=hanchor arialabel=Anchor># </span>eg1 采用extends的方式</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test01</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建线程对象
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>A</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>A</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//t.run()//依旧是在main栈中，还是单线程，因为是调用的run方法在主栈中运行
+</span></span></span><span class=line><span class=cl><span class=c1>//怎么看几个线程，看有没有开辟新栈就是最简单的方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;启动多线程&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span><span class=c1>//开辟线程分支，开辟一个栈分支线程，只有一瞬间，就会结束这个方法。
+</span></span></span><span class=line><span class=cl><span class=c1>//然后JVM会自动在分支线程中，调用t的run方法，运行另一个分支线程
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>//以下的依旧是在main栈中运行
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=n>0</span><span class=o>;</span><span class=n>i</span><span class=o>&lt;</span><span class=n>100</span><span class=o>;</span><span class=n>i</span><span class=o>++){</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;主线程main--&gt;&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>A</span> <span class=kd>extends</span> <span class=n>Thread</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=n>0</span><span class=o>;</span><span class=n>i</span><span class=o>&lt;</span><span class=n>100</span><span class=o>;</span><span class=n>i</span><span class=o>++){</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;分支线程t--&gt;&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>+</span><span class=s>&#34;===========&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%202.png width=auto alt=可以看到主线程和分支线程分别运行自己的，所以输出顺序不定></p><p>可以看到主线程和分支线程分别运行自己的，所以输出顺序不定</p><a href=#eg2-采用implements的方式-推荐这种方式><h2 id=eg2-采用implements的方式-推荐这种方式><span class=hanchor arialabel=Anchor># </span>eg2 采用<code>implements</code>的方式 推荐这种方式</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test02</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//线程对象
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>B</span><span class=o>());</span><span class=c1>//把实现了Runnable的类创建对象，作为参数传进去，封装成线程对象
+</span></span></span><span class=line><span class=cl><span class=c1>//启动分支线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//主分支
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>100</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;主分支&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>B</span> <span class=kd>implements</span> <span class=n>Runnable</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>100</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;分支线程===========&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%203.png width=auto alt=Untitled></p><a href=#eg3-implements结合匿名内部类的方式><h2 id=eg3-implements结合匿名内部类的方式><span class=hanchor arialabel=Anchor># </span>eg3 implements结合匿名内部类的方式</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test03</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//采用匿名内部类的方式
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Runnable</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>            <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>100</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;分支线程======&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>});</span>
+</span></span><span class=line><span class=cl><span class=c1>//启动线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//主方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>100</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;主线程&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%204.png width=auto alt=Untitled></p><a href=#eg4-实现callable接口的方式><h2 id=eg4-实现callable接口的方式><span class=hanchor arialabel=Anchor># </span>eg4 实现Callable接口的方式</h2></a><p>需要作为参数将继承了<code>Callable</code>接口的对象传入FutureTask的构造方法中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sun.security.util.AuthResources_it</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.text.SimpleDateFormat</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Set</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.concurrent.Callable</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.concurrent.FutureTask</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test17</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建未来任务
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Fu</span> <span class=n>f</span><span class=o>=</span><span class=k>new</span> <span class=n>Fu</span><span class=o>();</span><span class=c1>//Fu对象创建，继承了Callable接口，作为参数传入到未来任构造方法中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>FutureTask</span> <span class=n>task</span><span class=o>=</span><span class=k>new</span> <span class=n>FutureTask</span><span class=o>(</span><span class=n>f</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//将未来任务作为一个线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=n>task</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t线程----》&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//启动线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取t线程的运行时间
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>String</span> <span class=n>s</span><span class=o>=</span><span class=n>task</span><span class=o>.</span><span class=na>get</span><span class=o>().</span><span class=na>toString</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>t</span><span class=o>.</span><span class=na>getName</span><span class=o>()+</span><span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//返回了方法的运行时间
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>class</span> <span class=nc>Fu</span> <span class=kd>implements</span> <span class=n>Callable</span><span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//这个call方法，就相当于run方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Object</span> <span class=nf>call</span><span class=o>()</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取开始时间戳
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>long</span> <span class=n>begin</span><span class=o>=</span><span class=n>System</span><span class=o>.</span><span class=na>currentTimeMillis</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span> <span class=s>&#34;start call&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>*</span><span class=n>5</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span> <span class=s>&#34;start end&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取结束时间戳
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>long</span> <span class=n>end</span><span class=o>=</span><span class=n>System</span><span class=o>.</span><span class=na>currentTimeMillis</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//计算运行了多少秒
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>long</span> <span class=n>speed</span><span class=o>=(</span><span class=n>end</span><span class=o>-</span><span class=n>begin</span><span class=o>)/</span><span class=n>1000</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>speed</span><span class=o>;</span><span class=c1>//自动装箱
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%205.png width=auto alt=Untitled></p><a href=#常用方法><h1 id=常用方法><span class=hanchor arialabel=Anchor># </span>常用方法</h1></a><ol><li>获取当前线程:<code>Thread.currentThread()</code></li><li>获取线程名称：<code>getName()</code></li><li>设置线程名字:<code>setName()</code></li><li>休眠线程：<code>Thread.sleep()</code> 在哪个进程使用，就哪个线程休眠</li><li>终止线程的睡眠（叫醒线程，不让它睡眠）:<code>.interrupt()</code></li><li>设置守护线程 <code>setDaemon(True)</code></li></ol><a href=#eg1-静态方法-threadsleep><h2 id=eg1-静态方法-threadsleep><span class=hanchor arialabel=Anchor># </span>eg1 静态方法 Thread.sleep()</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test05</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span>  <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Runnable</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>            <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>5000</span><span class=o>);</span><span class=c1>//分支线程休眠五秒
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;分支线程运行==========&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>});</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;分支线程t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//分支线程运行
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>//主线程运行
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;主线程运行&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;分支程序运行&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span><span class=c1>//休眠1秒
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#eg2-thread面试题><h2 id=eg2-thread面试题><span class=hanchor arialabel=Anchor># </span>eg2 Thread面试题</h2></a><p>在main方法中的t.sleep是否会休眠t线程</p><p>并不会，因为t.sleep()会转换成<code>thread.sleep()</code></p><p>无论怎么变，<strong>休眠的始终是当前线程</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Set</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test06</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>AAA</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>t</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>5000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;end&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span>  <span class=nc>AAA</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;线程分支运行=====&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%206.png width=auto alt=Untitled></p><a href=#eg3-终止线程的睡眠叫醒线程不让它睡眠interrupt><h2 id=eg3-终止线程的睡眠叫醒线程不让它睡眠interrupt><span class=hanchor arialabel=Anchor># </span>eg3 终止线程的睡眠（叫醒线程，不让它睡眠）:<code>.interrupt()</code></h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span> <span class=nn>com.bjpowernode.java.thread</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>sleep睡眠太久了，如果希望半道上醒来，你应该怎么办？也就是说怎么叫醒一个正在睡眠的线程？？
+</span></span></span><span class=line><span class=cl><span class=cm>    注意：这个不是终断线程的执行，是终止线程的睡眠。
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>ThreadTest08</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>MyRunnable2</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//希望5秒之后，t线程醒来（5秒之后主线程手里的活儿干完了。）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span> <span class=o>*</span> <span class=n>5</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>//终断t线程的睡眠（这种终断睡眠的方式依靠了java的异常处理机制。）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t</span><span class=o>.</span><span class=na>interrupt</span><span class=o>();</span><span class=c1>//干扰，一盆冷水过去！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyRunnable2</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//重点：run()当中的异常不能throws，只能try catch
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>//因为run()方法在父类中没有抛出任何异常，子类不能比父类抛出更多的异常。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;---&gt; begin&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//睡眠1年
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span> <span class=o>*</span> <span class=n>60</span> <span class=o>*</span> <span class=n>60</span> <span class=o>*</span> <span class=n>24</span> <span class=o>*</span> <span class=n>365</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//打印异常信息
+</span></span></span><span class=line><span class=cl><span class=c1>//e.printStackTrace();
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>//1年之后才会执行这里
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;---&gt; end&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//调用doOther
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>//doOther();
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//其它方法可以throws
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=cm>/*public void doOther() throws Exception{
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>    }*/</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%207.png width=auto alt=Untitled></p><a href=#eg4-终止线程的执行1---stop不建议-不会保存数据><h2 id=eg4-终止线程的执行1---stop不建议-不会保存数据><span class=hanchor arialabel=Anchor># </span>eg4 终止线程的执行1 stop()不建议 不会保存数据</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test08</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>A1</span> <span class=n>a1</span><span class=o>=</span><span class=k>new</span> <span class=n>A1</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=n>a1</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;开始线程&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span><span class=c1>//
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>//5s之后终止线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>5000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>//终止线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t</span><span class=o>.</span><span class=na>stop</span><span class=o>();</span><span class=c1>//过时的终止，不会保存数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;end&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>A1</span> <span class=kd>implements</span> <span class=n>Runnable</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span> <span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span><span class=c1>//睡1s
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%208.png width=auto alt=Untitled></p><a href=#eg5-良好的终止线程><h2 id=eg5-良好的终止线程><span class=hanchor arialabel=Anchor># </span>eg5 良好的终止线程</h2></a><p>优点：需要执行阶段是执行完了的，不是像stop那样强制停止，可能造成数据的丢失等等问题</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test09</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>A2</span> <span class=n>a</span> <span class=o>=</span> <span class=k>new</span> <span class=n>A2</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=n>a</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>5000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// t.stop(); //强制停止线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>a</span><span class=o>.</span><span class=na>runStatus</span><span class=o>=</span><span class=kc>false</span><span class=o>;</span><span class=c1>//更好地停止方式
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>a</span><span class=o>.</span><span class=na>runStatus</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>A2</span> <span class=kd>extends</span> <span class=n>Thread</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Boolean</span> <span class=n>runStatus</span><span class=o>=</span><span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>runStatus</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;===&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%209.png width=auto alt=Untitled></p><a href=#eg6-守护线程><h2 id=eg6-守护线程><span class=hanchor arialabel=Anchor># </span>eg6 守护线程</h2></a><aside>💡 守护线程一般是死循环，设置为守护线程之后，会伴随用户线程的死亡而死亡
+**用户线程结束，守护线程自动终止**</aside><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>jdk.nashorn.internal.ir.WhileNode</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sun.security.util.AuthResources_it</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Set</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test15</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>backup</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Backup</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>backup</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;【备份线程t】&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//设置成守护线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>backup</span><span class=o>.</span><span class=na>setDaemon</span><span class=o>(</span><span class=kc>true</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//开启线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>backup</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;主程序运行&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>Backup</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//模拟备份
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=o>(</span><span class=kc>true</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;正在备份--&gt;&#34;</span><span class=o>+(++</span><span class=n>i</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=n>sleep</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2010.png width=auto alt=Untitled></p><a href=#常见的线程调度模型><h1 id=常见的线程调度模型><span class=hanchor arialabel=Anchor># </span>常见的线程调度模型</h1></a><a href=#分类><h2 id=分类><span class=hanchor arialabel=Anchor># </span>分类</h2></a><ol><li><p><strong>抢占式</strong>调度模型</p><ul><li>根据<strong>线程的优先级</strong>来对其分配时间片抢占的概率</li><li>优先级<ul><li>默认：5 MIN：1 MAX:10</li></ul></li></ul><p>设置优先级</p></li><li><p><strong>均分式</strong>调度模型</p><p><strong>平均分配</strong></p></li></ol><a href=#线程调度-有关的方法><h2 id=线程调度-有关的方法><span class=hanchor arialabel=Anchor># </span>线程调度 有关的方法</h2></a><ol><li><a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>设置优先级方法</a>：<code>setPriority();</code> 实例方法</li><li>获取优先级方法：<code>getPriority();</code></li><li><a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>让位方法</a>：<code>yield()</code>,暂停当前执行的线程对象，并执行别的线程 （运行状态—> 就绪状态）不是阻塞<ol><li>类似于抓阄，你抓到了，但是因为yield，你需要把这个纸条放回到盒子里面，大家又一起抓阄。抓到的依旧有可能是你</li></ol></li><li><a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>合并线程</a>：<code>join()</code></li></ol><hr><a href=#设置线程优先级><h3 id=设置线程优先级><span class=hanchor arialabel=Anchor># </span>设置线程优先级</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test11</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;max:&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>MAX_PRIORITY</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;min:&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>MIN_PRIORITY</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;normal:&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>NORM_PRIORITY</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//设置main线程优先级
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>setPriority</span><span class=o>(</span><span class=n>1</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Runnable</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>            <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>1000</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;---&gt;&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setPriority</span><span class=o>(</span><span class=n>10</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>1000</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;==&gt;&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2011.png width=auto alt=可以看到优先级更高的执行的时间片频率更高></p><p>可以看到优先级更高的执行的时间片频率更高</p><a href=#让位><h3 id=让位><span class=hanchor arialabel=Anchor># </span>让位</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test12</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>MyRunnable6</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>1</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=n>10000</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;---&gt;&#34;</span> <span class=o>+</span> <span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyRunnable6</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>1</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=n>10000</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//每100个让位一次。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>if</span><span class=o>(</span><span class=n>i</span> <span class=o>%</span> <span class=n>100</span> <span class=o>==</span> <span class=n>0</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;yield============&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>Thread</span><span class=o>.</span><span class=na>yield</span><span class=o>();</span><span class=c1>//当前线程暂停一下，让给主线程。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;---&gt;&#34;</span> <span class=o>+</span> <span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2012.png width=auto alt=Untitled></p><p>让位不一定就是另一个线程运行，只是暂停当前线程的运行，回归到就绪，然后重新抢占时间片，依旧可能是之前让位的线程抢占到时间片。</p><a href=#线程合并-join><h3 id=线程合并-join><span class=hanchor arialabel=Anchor># </span>线程合并 join</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test13</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Runnable</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>            <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10000</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;--&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>});</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;main begin&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span><span class=n>10000</span> <span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//main到5000的时候，就进入阻塞状态，让t运行完了之后我才运行
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>if</span> <span class=o>(</span><span class=n>i</span><span class=o>==</span><span class=n>5000</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>t</span><span class=o>.</span><span class=na>join</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;=======&#34;</span><span class=o>+</span><span class=n>i</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;Main end&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2013.png width=auto alt=Untitled></p><a href=#线程安全线程同步机制synchronize><h1 id=线程安全线程同步机制synchronize><span class=hanchor arialabel=Anchor># </span>线程安全（线程同步机制synchronize）</h1></a><a href=#书写注意点-1><h2 id=书写注意点-1><span class=hanchor arialabel=Anchor># </span>书写注意点：</h2></a><ol><li><p><code>synchronize()</code>括号中填写的<strong>对象</strong>是这些进程之间<strong>所共享的进程实例对象</strong>，比如
+<a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ rel=noopener class=internal-link data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/>例子</a>。</p></li><li><p><strong>同步代码块的范围越小，效率越高</strong></p></li><li><p>放在实例方法上，表示共享对象是<code>this</code> 但是<strong>整个方法体</strong>都参与了同步（比如<code>StringBuffer</code>的方法）</p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2014.png width=auto alt=Untitled></p></li></ol><p>什么时候用：静态</p><a href=#三种写法><h2 id=三种写法><span class=hanchor arialabel=Anchor># </span>三种写法</h2></a><ol><li>同步代码块</li><li>实例方法同步</li><li>类锁（排它锁，统一类的所有对象只有一把锁）<ol><li>synchronize出现在静态方法（有static修饰的方法）上</li></ol></li></ol><a href=#原理><h2 id=原理><span class=hanchor arialabel=Anchor># </span>原理</h2></a><ol><li>原理：<ol><li>每个对象都有一把锁，这把锁决定了程序执行的权利，当程序线程运行到synchronize的时候，就会查看自己是否有括号中的这把锁。</li><li>如果有，就可以进入同步代码区 进行时间片的抢占；如果发现锁被别的线程拿到了（线程运行的过程中一直是持有这把锁的），自己就需要在同步代码区外面<strong>等待</strong>他用完释放。</li><li>当发现释放的锁之后，参与共享的线程就会抢那个锁，然后拿到在同步代码区中抢占时间片的权利，抢到时间片，就可以继续执行了。</li></ol></li><li>如果括号中的是“abc”，因为abc是一个常量量，在常量池中的对象，所以每个参与abc的同步锁的线程，都会相互等待，非常费时间</li><li><strong>局部变量和常量不存在安全问题，因为局部变量不共享，常量不可修改</strong></li></ol><a href=#相关><h2 id=相关><span class=hanchor arialabel=Anchor># </span>相关</h2></a><p>出现线程安全的三个条件</p><ol><li>多线程并发</li><li>线程共享数据</li><li>有修改数据的行为</li></ol><p>如何解决：</p><p><strong>线程排队</strong>的方式解决线程安全问题，这种机制称为“<strong>线程同步机制</strong>”，会牺牲一部分效率</p><a href=#相关编程模型><h3 id=相关编程模型><span class=hanchor arialabel=Anchor># </span>相关：编程模型</h3></a><ol><li>同步编程模型：线程之间发生了等待关系，比如t1需要看t2发生什么或者满足什么，t1才会继续执行，需要照顾到别的线程的运行条件。线程同步机制，需要排队</li><li>异步编程模型：自己干自己的，不管别人。并发</li></ol><a href=#线程安全eg><h2 id=线程安全eg><span class=hanchor arialabel=Anchor># </span>线程安全eg</h2></a><a href=#eg1-线程安全问题两个线程对同一个账户进行访问><h3 id=eg1-线程安全问题两个线程对同一个账户进行访问><span class=hanchor arialabel=Anchor># </span>eg1 线程安全问题：两个线程对同一个账户进行访问</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Account</span> <span class=n>a1</span><span class=o>=</span><span class=k>new</span> <span class=n>Account</span><span class=o>(</span><span class=s>&#34;张三&#34;</span><span class=o>,</span><span class=n>1500</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t1</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>AccountThread</span><span class=o>(</span><span class=n>a1</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t2</span><span class=o>=</span><span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>AccountThread</span><span class=o>(</span><span class=n>a1</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t1&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t2&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;余额:&#34;</span><span class=o>+</span><span class=n>a1</span><span class=o>.</span><span class=na>getBalance</span><span class=o>());</span>
+</span></span><span class=line><span class=cl><span class=c1>//启动线程取款
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t1</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>AccountThread</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Account</span> <span class=n>act</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>AccountThread</span><span class=o>(</span><span class=n>Account</span> <span class=n>act</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>act</span> <span class=o>=</span> <span class=n>act</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//模拟网络延迟
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>1001</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//取款操作
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>double</span> <span class=n>money</span><span class=o>=</span><span class=n>500</span><span class=o>;</span><span class=c1>//取款金额
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>act</span><span class=o>.</span><span class=na>withdraw</span><span class=o>(</span><span class=n>money</span><span class=o>);</span><span class=c1>//取款操作
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=s>&#34;线程：&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34;\t&#34;</span><span class=o>+</span><span class=n>act</span><span class=o>.</span><span class=na>getName</span><span class=o>()+</span><span class=s>&#34; 取款成功！ 余额：&#34;</span><span class=o>+</span><span class=n>act</span><span class=o>.</span><span class=na>getBalance</span><span class=o>());</span><span class=c1>//余额
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Account</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>String</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>double</span> <span class=n>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//封装
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Account</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>String</span> <span class=nf>getName</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>setName</span><span class=o>(</span><span class=n>String</span> <span class=n>name</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>name</span> <span class=o>=</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>double</span> <span class=nf>getBalance</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>setBalance</span><span class=o>(</span><span class=kt>double</span> <span class=n>balance</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>balance</span> <span class=o>=</span> <span class=n>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Account</span><span class=o>(</span><span class=n>String</span> <span class=n>name</span><span class=o>,</span> <span class=kt>double</span> <span class=n>balance</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>name</span> <span class=o>=</span> <span class=n>name</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>balance</span> <span class=o>=</span> <span class=n>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//取钱
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>withdraw</span><span class=o>(</span><span class=kt>double</span> <span class=n>money</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>        <span class=kt>double</span> <span class=n>before</span><span class=o>=</span><span class=k>this</span><span class=o>.</span><span class=na>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>double</span> <span class=n>after</span><span class=o>=</span><span class=k>this</span><span class=o>.</span><span class=na>balance</span><span class=o>-</span><span class=n>money</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>balance</span><span class=o>=</span><span class=n>after</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2015.png width=auto alt=Untitled></p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2016.png width=auto alt=Untitled></p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2017.png width=auto alt=Untitled></p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2018.png width=auto alt=Untitled></p><p>出现了四种情况，有两种错误的情况。</p><p>修改取款方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>withdraw</span><span class=o>(</span><span class=kt>double</span> <span class=n>money</span><span class=o>){</span>
+</span></span><span class=line><span class=cl><span class=c1>//括号里面代表的是账户对象，
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>synchronized</span> <span class=o>(</span><span class=k>this</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Thread</span><span class=o>.</span><span class=na>sleep</span><span class=o>(</span><span class=n>200</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>double</span> <span class=n>before</span><span class=o>=</span><span class=k>this</span><span class=o>.</span><span class=na>balance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>double</span> <span class=n>after</span><span class=o>=</span><span class=n>before</span><span class=o>-</span><span class=n>money</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>setBalance</span><span class=o>(</span><span class=n>after</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>正确了</p><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2019.png width=auto alt=Untitled></p><p>目前不懂得是，如果不添加sleep，还是会出现不同步的情况，余额会变成两个500</p><a href=#线程死锁><h1 id=线程死锁><span class=hanchor arialabel=Anchor># </span>线程死锁</h1></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import static</span> <span class=nn>java.lang.Thread.sleep</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test01</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Object</span> <span class=n>o1</span><span class=o>=</span><span class=k>new</span> <span class=n>Object</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>Object</span> <span class=n>o2</span><span class=o>=</span><span class=k>new</span> <span class=n>Object</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建线程 两个线程公用两个对象
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>Thread</span> <span class=n>t1</span><span class=o>=</span><span class=k>new</span> <span class=n>MyThread1</span><span class=o>(</span><span class=n>o1</span><span class=o>,</span><span class=n>o2</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Thread</span> <span class=n>t2</span><span class=o>=</span><span class=k>new</span> <span class=n>MyThread2</span><span class=o>(</span><span class=n>o1</span><span class=o>,</span><span class=n>o2</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t1&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;t2&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//启动线程
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>t1</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyThread1</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Object</span> <span class=n>o1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Object</span> <span class=n>o2</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>MyThread1</span><span class=o>(</span><span class=n>Object</span> <span class=n>o1</span><span class=o>,</span> <span class=n>Object</span> <span class=n>o2</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>o1</span> <span class=o>=</span> <span class=n>o1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>o2</span> <span class=o>=</span> <span class=n>o2</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>synchronized</span> <span class=o>(</span><span class=n>o1</span><span class=o>){</span>
+</span></span><span class=line><span class=cl><span class=c1>//睡眠
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=cm>/*    try {
+</span></span></span><span class=line><span class=cl><span class=cm>                Thread.sleep(2000);
+</span></span></span><span class=line><span class=cl><span class=cm>            } catch (InterruptedException e) {
+</span></span></span><span class=line><span class=cl><span class=cm>                e.printStackTrace();
+</span></span></span><span class=line><span class=cl><span class=cm>            } */</span>
+</span></span><span class=line><span class=cl><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>());</span>
+</span></span><span class=line><span class=cl><span class=c1>//嵌套
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>synchronized</span> <span class=o>(</span><span class=n>o2</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>class</span> <span class=nc>MyThread2</span> <span class=kd>extends</span> <span class=n>Thread</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Object</span> <span class=n>o1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Object</span> <span class=n>o所以尽</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2020.png width=auto alt=Untitled></p><p>一直在执行，但是执行不了，因为synchronize的原因，一直在等对方的同步锁释放，但是因为两个都提前占用了对方所需要的同步锁，一直没办法释放，所以造成了死锁。就相当于两个人堵在门口一直僵持</p><p>**死锁不报错，无异常，难以纠错。**线程无法继续向下继续执行。执行一百年😒so</p><p>所以尽量不要选择同步锁嵌套，如果你处理不好，电脑这辈子就卡在死锁上了</p><a href=#定时器timer><h1 id=定时器timer><span class=hanchor arialabel=Anchor># </span>定时器Timer</h1></a><a href=#书写注意点-2><h2 id=书写注意点-2><span class=hanchor arialabel=Anchor># </span>书写注意点</h2></a><ol><li>对定时器任务的类需要继承<code>TimerTask</code> ，并且重写<code>run</code>方法</li><li>new的时候可以设置Timer对象的参数，<strong>Timer(true)表示，以守护进程的方式设置定时器</strong></li><li>可以采用匿名内部类的方式</li></ol><a href=#eg1><h2 id=eg1><span class=hanchor arialabel=Anchor># </span>eg1</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.text.SimpleDateFormat</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Date</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Timer</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.TimerTask</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>TimerTest</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>Exception</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Timer</span> <span class=n>timer</span><span class=o>=</span><span class=k>new</span> <span class=n>Timer</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=c1>// Timer timer=new Timer(true);//采用守护进程的方式运行
+</span></span></span><span class=line><span class=cl><span class=c1>//设置的时间
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>SimpleDateFormat</span> <span class=n>geshi</span><span class=o>=</span><span class=k>new</span> <span class=n>SimpleDateFormat</span><span class=o>(</span><span class=s>&#34;yyyy-MM-dd HH:mm:ss&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Date</span> <span class=n>firstTime</span><span class=o>=</span><span class=n>geshi</span><span class=o>.</span><span class=na>parse</span><span class=o>(</span><span class=s>&#34;2022-08-06 10:18:40&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=c1>//创建定时器任务
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>timer</span><span class=o>.</span><span class=na>schedule</span><span class=o>(</span><span class=k>new</span> <span class=n>LogTimer</span><span class=o>(),</span><span class=n>firstTime</span><span class=o>,</span><span class=n>1000</span><span class=o>*</span><span class=n>10</span><span class=o>);</span><span class=c1>//10秒运行一次
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//模拟数据备份的定时器
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>class</span> <span class=nc>LogTimer</span> <span class=kd>extends</span> <span class=n>TimerTask</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=c1>//获取当前时间
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>SimpleDateFormat</span> <span class=n>s</span><span class=o>=</span><span class=k>new</span> <span class=n>SimpleDateFormat</span><span class=o>(</span><span class=s>&#34;yyyy-MM-dd HH:mm:ss SSS&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>String</span> <span class=n>now</span><span class=o>=</span><span class=n>s</span><span class=o>.</span><span class=na>format</span><span class=o>(</span><span class=k>new</span> <span class=n>Date</span><span class=o>());</span>
+</span></span><span class=line><span class=cl><span class=c1>//输出
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>now</span><span class=o>+</span><span class=s>&#34;:完成数据备份&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2021.png width=auto alt=Untitled></p><a href=#生产者和消费者模式wait-notify><h1 id=生产者和消费者模式wait-notify><span class=hanchor arialabel=Anchor># </span>生产者和消费者模式wait() notify()</h1></a><aside>💡 wait和notify是Java对象的方法，不是线程对象的方法，不要通过线程对象去调用</aside><a href=#作用><h2 id=作用><span class=hanchor arialabel=Anchor># </span>作用</h2></a><aside>💡 在多个线程共享一个对象</aside><a href=#方法作用><h2 id=方法作用><span class=hanchor arialabel=Anchor># </span>方法作用</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>Object</span> <span class=n>o</span><span class=o>=</span><span class=k>new</span> <span class=n>Object</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=n>o</span><span class=o>.</span><span class=na>wait</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=n>o</span><span class=o>.</span><span class=na>notify</span><span class=o>();</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>wait：</code>表示将o对象<strong>正在运行的进程进入等待状态，无期限等待，直到调用<code>notify</code>方法唤醒</strong></p><p><strong>释放掉线程占用o对象的锁</strong></p><p><code>notify</code>：可以让o对象正在等待的线程唤醒</p><p><strong>不会释放线程占用o对象的锁</strong>，只是通知</p><p><code>notifyAll</code>：唤醒o对象上正在等待的所有线程</p><a href=#解释wait和notify><h3 id=解释wait和notify><span class=hanchor arialabel=Anchor># </span>解释wait和notify</h3></a><p>正在打群架，有一个人是跟我对线的，我是一个Object，需要获取与我之间的对战资格才能跟我打</p><p>他：我要揍你（获取了与我之间对线的对象锁，获取了与我的对战资格）</p><p>我：等一下，（释放了对象锁，没有了与我的对战资格，wait中）</p><p>他：开始等待</p><p>我：好了，别打帅脸（notify，我对其进行了唤醒）</p><p>他：抢夺对战资格，获取对象锁，揍了我一顿</p><a href=#eg1-生产者和消费者问题><h2 id=eg1-生产者和消费者问题><span class=hanchor arialabel=Anchor># </span>eg1 生产者和消费者问题</h2></a><p>达到的结果：生产一个消费一个，都是同一个</p><p>代码解说员：</p><ol><li>因为是一一直生产，就使用while</li><li>两个线程公用一个对象，所以需要用到线程同步机制<code>synchronize</code></li><li>需要对仓库的容量进行判断，生产时，大于0就说明有货，进入等待，释放对象锁，</li><li>此时会竞争对象锁获取运行时间片，当消费者获取到时间片，发现大于0，就开始消费，运行完之后，<strong>不会释放锁，而是运行完了synchronize同步代码块之后才释放</strong></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>import</span> <span class=nn>javax.swing.*</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>javax.xml.crypto.Data</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.text.SimpleDateFormat</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.ArrayList</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.Date</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>java.util.List</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Test18</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>main</span><span class=o>(</span><span class=n>String</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>List</span> <span class=n>lists</span> <span class=o>=</span> <span class=k>new</span> <span class=n>ArrayList</span><span class=o>();</span><span class=c1>// 仓库对象
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// 创建两个线程，一个生产一个消费
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// 两个线程公用一个仓库对象
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Thread</span> <span class=n>t1</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Producer</span><span class=o>(</span><span class=n>lists</span><span class=o>));</span><span class=c1>// 将生产者作为参数传进去
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Thread</span> <span class=n>t2</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Thread</span><span class=o>(</span><span class=k>new</span> <span class=n>Consumer</span><span class=o>(</span><span class=n>lists</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;生产者线程---&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>setName</span><span class=o>(</span><span class=s>&#34;消费者线程---&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>t2</span><span class=o>.</span><span class=na>start</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 生产者
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>class</span> <span class=nc>Producer</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>List</span> <span class=n>lists</span><span class=o>;</span><span class=c1>// 仓库
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Producer</span><span class=o>(</span><span class=n>List</span> <span class=n>lists</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>lists</span> <span class=o>=</span> <span class=n>lists</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 一直生产
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(</span><span class=kc>true</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kd>synchronized</span> <span class=o>(</span><span class=n>lists</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// 仓库中是否有货
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=k>if</span> <span class=o>(</span><span class=n>lists</span><span class=o>.</span><span class=na>size</span><span class=o>()</span> <span class=o>&gt;</span> <span class=n>0</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=c1>// 有货就等待，释放掉list的锁
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>lists</span><span class=o>.</span><span class=na>wait</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// 能运行到这里，说明仓库没货了，那就开始制造
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>Object</span> <span class=n>o</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Object</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=c1>//制造的时候，都想当懒狗，就歇一会
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>lists</span><span class=o>.</span><span class=na>wait</span><span class=o>(</span><span class=n>1000</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=n>lists</span><span class=o>.</span><span class=na>add</span><span class=o>(</span><span class=n>o</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=c1>//加个时间，不然不好看
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>SimpleDateFormat</span> <span class=n>gs</span><span class=o>=</span><span class=k>new</span> <span class=n>SimpleDateFormat</span><span class=o>(</span><span class=s>&#34;HH:mm:ss SSS&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>String</span> <span class=n>now</span><span class=o>=</span><span class=n>gs</span><span class=o>.</span><span class=na>format</span><span class=o>(</span><span class=k>new</span> <span class=n>Date</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>now</span><span class=o>+</span><span class=s>&#34;-&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;制造货物：&#34;</span> <span class=o>+</span> <span class=n>o</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>lists</span><span class=o>.</span><span class=na>notify</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 消费者
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>class</span> <span class=nc>Consumer</span> <span class=kd>implements</span> <span class=n>Runnable</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>List</span> <span class=n>lists</span><span class=o>;</span><span class=c1>// 仓库
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Consumer</span><span class=o>(</span><span class=n>List</span> <span class=n>lists</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>lists</span> <span class=o>=</span> <span class=n>lists</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>run</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 一直消费
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=o>(</span><span class=kc>true</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kd>synchronized</span> <span class=o>(</span><span class=n>lists</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// 判断是否仓库是否有货
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=k>if</span> <span class=o>(</span><span class=n>lists</span><span class=o>.</span><span class=na>size</span><span class=o>()</span> <span class=o>==</span> <span class=n>0</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=c1>// 仓库没货，就不能消费了，等待生产者生产，释放掉锁
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>lists</span><span class=o>.</span><span class=na>wait</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>InterruptedException</span> <span class=n>e</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>e</span><span class=o>.</span><span class=na>printStackTrace</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// 能运行到这里，说明仓库有货
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>Object</span> <span class=n>o</span> <span class=o>=</span> <span class=n>lists</span><span class=o>.</span><span class=na>remove</span><span class=o>(</span><span class=n>lists</span><span class=o>.</span><span class=na>size</span><span class=o>()</span> <span class=o>-</span> <span class=n>1</span><span class=o>);</span><span class=c1>// 获取删除的最后一个货物的对象
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>                <span class=n>SimpleDateFormat</span> <span class=n>gs</span><span class=o>=</span><span class=k>new</span> <span class=n>SimpleDateFormat</span><span class=o>(</span><span class=s>&#34;HH:mm:ss SSS&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>String</span> <span class=n>now</span><span class=o>=</span><span class=n>gs</span><span class=o>.</span><span class=na>format</span><span class=o>(</span><span class=k>new</span> <span class=n>Date</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>.</span><span class=na>println</span><span class=o>(</span><span class=n>now</span><span class=o>+</span><span class=s>&#34;-&#34;</span><span class=o>+</span><span class=n>Thread</span><span class=o>.</span><span class=na>currentThread</span><span class=o>().</span><span class=na>getName</span><span class=o>()</span> <span class=o>+</span> <span class=s>&#34;消费货物：&#34;</span> <span class=o>+</span> <span class=n>o</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=c1>// 消费了，叫醒生产者生产
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>lists</span><span class=o>.</span><span class=na>notify</span><span class=o>();</span><span class=c1>// 不会释放锁，但是如果循环，进入到wait就会释放了
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=https://ob.tianzhongs.ml//asset/Untitled%2022.png width=auto alt=Untitled></p></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>反向链接</h3><ul class=backlinks><li><a href=/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ data-ctx=例子 data-src=/%E5%A4%9A%E7%BA%BF%E7%A8%8B class=internal-link></a></li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>内部链接关系图</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://ob.tianzhongs.ml/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><hr><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js></script><script src=alittlejs/md5.min.js></script><div id=gitalk-container></div><script>var gitalk=new Gitalk({clientID:"b3d1e82d398c36a4a587",clientSecret:"973b351e5ad4ff9ea6d93e7db3f431beef48dc2d",repo:"ObPublish",owner:"tianzhongs",admin:["Tianzhongs"],id:location.href,distractionFreeMode:!1});gitalk.render("gitalk-container")</script></div></body></html>
