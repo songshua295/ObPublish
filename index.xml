@@ -184,4 +184,30 @@ Properties是一个Map集合，继承Hashtable，Properties的key和value都是S
 获取路径： String path=Thread.currentThread().getContextClassLoader().getResource(&amp;quot;com/reflect/t1/test.txt&amp;quot;).getPath();
 流的方式返回（方便获取配置文件）：InputStream reader=Thread.*currentThread*().getContextClassLoader().getResourceAsStream(&amp;quot;peizhi.properties&amp;quot;);
 比如是在类根文件夹下的文件才可以（src目录会复制到out的project目录下）
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 import java.</description></item><item><title>Obsidian知识库笔记相关注意事项</title><link>https://ob.tianzhongs.ml/Obsidian%E7%9F%A5%E8%AF%86%E5%BA%93%E7%AC%94%E8%AE%B0%E7%9B%B8%E5%85%B3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/Obsidian%E7%9F%A5%E8%AF%86%E5%BA%93%E7%AC%94%E8%AE%B0%E7%9B%B8%E5%85%B3/</guid><description>关于内容 尤其需要注意的是，在每片文章中书写一个yaml头，其中yaml头包括了title字段，用来标识这篇文章的标题，当然，如果没有也没有太大的问题，只是不能显示这个标题，但一般还是建议有一个 如果每次添加比较麻烦，你可以配合Obsidan中的Templater插件进行生成，当然，你还可以为其设置一个专属的快捷键，那会让你更“快”的。（下面放置了一个基本的Templater模板，yaml字段采用#号注释） 所有字段都可以不用，但是建议保留title字段，字段名和字段值中间采用:隔开，分号后面有一个空格，需要注意 1 2 3 4 5 6 7 8 9 --- comments: false #该字段可以不要，因为采用了gittalk的评论区，貌似已经不起作用了 date created: &amp;lt;% tp.</description></item><item><title>部署Obsidian静态知识库网站</title><link>https://ob.tianzhongs.ml/%E9%83%A8%E7%BD%B2Obsidian%E9%9D%99%E6%80%81%E7%9F%A5%E8%AF%86%E5%BA%93%E7%BD%91%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E9%83%A8%E7%BD%B2Obsidian%E9%9D%99%E6%80%81%E7%9F%A5%E8%AF%86%E5%BA%93%E7%BD%91%E7%AB%99/</guid><description>部署 基本结构 1 2 3 4 5 6 7 8 9 graph BT zck(子模块_笔记仓库) fckhugo(父仓库hugo分支) fckmaster(父仓库master分支)--&amp;gt;wz(你vercel部署的网站) zck.-通过推送workflows+TOKEN推送到.-&amp;gt;fckhugo fckhugo.-通过转换为gitpage的workflows+TOKEN转换到 .-&amp;gt;fckmaster 仓库设置以及部署 父仓库（用于发布仓库：fork） fork我的的ObPublish仓库，然后使用git工具克隆clone到本地。</description></item></channel></rss>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 import java.</description></item><item><title>ADB命令</title><link>https://ob.tianzhongs.ml/ADB%E5%91%BD%E4%BB%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/ADB%E5%91%BD%E4%BB%A4/</guid><description/></item><item><title>Obsidian知识库笔记相关注意事项</title><link>https://ob.tianzhongs.ml/Obsidian%E7%9F%A5%E8%AF%86%E5%BA%93%E7%AC%94%E8%AE%B0%E7%9B%B8%E5%85%B3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/Obsidian%E7%9F%A5%E8%AF%86%E5%BA%93%E7%AC%94%E8%AE%B0%E7%9B%B8%E5%85%B3/</guid><description>关于内容 尤其需要注意的是，在每片文章中书写一个yaml头，其中yaml头包括了title字段，用来标识这篇文章的标题，当然，如果没有也没有太大的问题，只是不能显示这个标题，但一般还是建议有一个 如果每次添加比较麻烦，你可以配合Obsidan中的Templater插件进行生成，当然，你还可以为其设置一个专属的快捷键，那会让你更“快”的。（下面放置了一个基本的Templater模板，yaml字段采用#号注释） 所有字段都可以不用，但是建议保留title字段，字段名和字段值中间采用:隔开，分号后面有一个空格，需要注意 1 2 3 4 5 6 7 8 9 --- comments: false #该字段可以不要，因为采用了gittalk的评论区，貌似已经不起作用了 date created: &amp;lt;% tp.</description></item><item><title>你是我三十六度的风</title><link>https://ob.tianzhongs.ml/%E4%BD%A0%E6%98%AF%E6%88%91%E4%B8%89%E5%8D%81%E5%85%AD%E5%BA%A6%E7%9A%84%E9%A3%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E4%BD%A0%E6%98%AF%E6%88%91%E4%B8%89%E5%8D%81%E5%85%AD%E5%BA%A6%E7%9A%84%E9%A3%8E/</guid><description>“你是我三十九度的风 &amp;quot;
+01 - 世间两种罪恶：你笑是一种，你不笑是另外一种。
+——@mokilmq
+02 - 夜阑卧听风吹雨，铁马是你，冰河也是你 君问归期未有期，巴山是你，夜雨也是你，月落乌啼霜满天。
+江枫是你，渔火也是你，玲珑骰子安红豆，入骨是你，相思也是你 山有木兮木有枝，心悦是你，不知也是你。
+——@弹得一手棉花
+03 - 你是我最爱的一杯酒，喝完我就走。</description></item><item><title>情镌三分木，相思万骨书</title><link>https://ob.tianzhongs.ml/%E6%83%85%E9%95%8C%E4%B8%89%E5%88%86%E6%9C%A8%E7%9B%B8%E6%80%9D%E4%B8%87%E9%AA%A8%E4%B9%A6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E6%83%85%E9%95%8C%E4%B8%89%E5%88%86%E6%9C%A8%E7%9B%B8%E6%80%9D%E4%B8%87%E9%AA%A8%E4%B9%A6/</guid><description>情镌三分木，相思万骨书
+醉、倾城
+　几渚梁梦杯中尽，独影朱阁泪成诗？万里婵娟银河坠，星辰似海踏歌来。故梦千里清铃响，静候梵音斩红尘。——题记。
+　那一世，你在这场缠绵的夜雨江南中为他悄悄的撑起那把泛青的油伞；我亦在烽台烛台望你千年之余，我曾听闻你为寻他走遍了千迢万里，踏过了雨雪绯林；而今离他只有那短短的一步之遥。看见你为了他在雨中温柔静候，那眼角滑落下的液体伴随着倾赋予他的漫天思念；静静的洒满这座城市的每一个角落。而我就这样静静的站在你们身后，多余的像极了一幅煞乱风景的残墨；顷刻间充斥着幸福流淌过的每一条暖流。但你是否曾知晓？那雨水从天而降肆无忌惮的在我的脸颊划落；泪水也参杂在雨水里紧附着思念随波逐流的晕开视线里残留下的最后一幅画面。也许你永远都不会知道，今生的我为了等候你那不轻易的回首；似乎比你等他的时间还要长。
+　听人说一个人的时候，温起壶中酒；独倚拜月楼，望着庭中盛放的满院流光；凄冷的冬风定会静静的摇落下一地的相思，只为承载起那些忧伤孤独的过往，在岁月的年轮中不停的刻圈成画；却始终画不到那个所谓的终点。有你的曾经一直潜藏在故事里蔓延着最为凄美的片段，梦中的枯藤已千年不绿；被风吹干后的答案；夺走了彼此记忆中最为动人的拥抱。那些禁锢在心底深处的怅然，冲淡了相聚时的喜悦与快乐；难以掩盖的忧伤中载满了无法清点不舍与难过。
+　人生短短十数载，梁月何时绕梦中？当彼此的相遇早已为离别埋下了深深的伏笔，当插肩而过时也不会在为过客不留的画面挽留下最后一丝温存；回忆总是美的让人心碎，曾经的过往依旧使人这般沉吟至今。或许那般留恋本不应该赖在记忆中，转进我心里霸占着每一寸缝隙。
+　冬日春雨几月寒，半阕红豆怎续情？望穿了奈何秋水，我们终究还是等不到那不期而遇的再见。少了梦里梦外的花开，你说着曾经的相遇是如此的云淡风轻，我想着坐拥过着有你的岁月铅华；那时的我梦中藤萝不香醒，梦醒时节花落西厢。敛一轮皓月星空，抒一卷痴情惘然。怎奈文字铺垫的岁月里依旧美轮美奂，不禁让人再次心涌执念；荡漾起那假睡着的海誓山盟。我曾想待你拂去我眉宇间的忧愁，我愿牵起你的手浪迹天涯。最为灿烂的爱情，过界后也不过是烟花转瞬繁落一季。真正的爱情必然是经得起流年锦瑟的厮守，相伴过帘卷云舒的夕霞；也会共赏着烟雨散尽后的那一池澄碧。而此时的冬风枯叶镌落下一</description></item><item><title>莫名很喜欢这个文案</title><link>https://ob.tianzhongs.ml/%E8%8E%AB%E5%90%8D%E5%BE%88%E5%96%9C%E6%AC%A2%E8%BF%99%E4%B8%AA%E6%96%87%E6%A1%88/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E8%8E%AB%E5%90%8D%E5%BE%88%E5%96%9C%E6%AC%A2%E8%BF%99%E4%B8%AA%E6%96%87%E6%A1%88/</guid><description>[莫名很喜欢这个文案：
+你知道，我有很多朋友。
+你介意过，我有很多朋友。
+我天生长袖善舞，如果愿意，可以把结识的所有人结交成朋友。
+除了你。
+我永远不想，和你做朋友。
+我永远不会再主动发消息给你，
+永远不会再和朋友提起你，
+永远会控制自己，不再想到你。
+你永远在我联系人的最末一位。
+和第一位隔了五十三页。
+所以有时候我想起你，就一点一点向下翻。
+翻到了,就不再那么想你了。
+你知道吗?
+我的,好朋友。</description></item><item><title>部署Obsidian静态知识库网站</title><link>https://ob.tianzhongs.ml/%E9%83%A8%E7%BD%B2Obsidian%E9%9D%99%E6%80%81%E7%9F%A5%E8%AF%86%E5%BA%93%E7%BD%91%E7%AB%99/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E9%83%A8%E7%BD%B2Obsidian%E9%9D%99%E6%80%81%E7%9F%A5%E8%AF%86%E5%BA%93%E7%BD%91%E7%AB%99/</guid><description>部署 基本结构 1 2 3 4 5 6 7 8 9 graph BT zck(子模块_笔记仓库) fckhugo(父仓库hugo分支) fckmaster(父仓库master分支)--&amp;gt;wz(你vercel部署的网站) zck.-通过推送workflows+TOKEN推送到.-&amp;gt;fckhugo fckhugo.-通过转换为gitpage的workflows+TOKEN转换到 .-&amp;gt;fckmaster 仓库设置以及部署 父仓库（用于发布仓库：fork） fork我的的ObPublish仓库，然后使用git工具克隆clone到本地。</description></item></channel></rss>
