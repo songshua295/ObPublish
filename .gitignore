@@ -7,3 +7,4 @@ assets/indices/linkIndex.json
 assets/indices/contentIndex.json
 linkmap
 .vercel
+content/private/*
