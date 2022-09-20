@@ -49,16 +49,44 @@
 
 <!-- 次数统计 start -->
 <style>
-    * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-    .word {
+:root {
+  --color-bg: #2B303A;
+  --cell-size: min(1rem, 2vw);
+  --letter-width: 5;
+  --letter-height: 7;
+}
+
+.container {
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.word {
   display: flex;
   flex-direction: row;
   gap: var(--cell-size);
+}
+
+.letter {
+  width: calc(var(--letter-width) * var(--cell-size));
+  height: calc(var(--letter-height) * var(--cell-size));
+  display: grid;
+  grid-template-columns: repeat(var(--letter-width), var(--cell-size));
+  grid-template-rows: repeat(var(--letter-height), var(--cell-size));
+}
+
+.cell {
+  transition: background-color .25s ease-in-out;
 }
 </style>
 <!-- <center> -->
