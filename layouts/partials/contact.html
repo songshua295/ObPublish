@@ -48,6 +48,25 @@
 </script>
 
 <!-- 次数统计 start -->
+<style type="text/css">
+    .box{
+       font-family:"微软雅黑";            /*设置字体*/
+       width:600px;                    /*设置元素宽度*/
+       background:lightgreen;
+       margin:50px auto;                /*设置外边距*/
+       font-size: 36px;                /*设置文字大小*/
+       color:blue;                    /*设置文字颜色*/
+       overflow:hidden;                /*隐藏溢出部分内容*/
+    }
+    .marquee{
+       position:relative;                /*设置相对定位*/
+       -webkit-animation: marquee 5s linear infinite alternate;/*设置动画*/
+    }
+    @-webkit-keyframes marquee{        /*创建动画*/
+        0%{ left:0px; }
+        100%{ left:200px; }
+    }
+</style>
 <center>
     <script>
     var caution = false
@@ -89,8 +108,9 @@
             else
                 visits = parseInt(visits) + 1
             setCookie("counter", visits, now)
-            document.write("<font size=2>访问量👋：" +"<font size=2 color=rgba(97, 144, 232, 255)>"+ visits + "</font></font>")
-    
+            document.write("<font class='marquee' size=2>访问量👋：" +"<font size=2 color=rgba(97, 144, 232, 255)>"+ visits + "</font></font>")
+            
+
         </script>
         </center>
     <!-- 次数统计 over -->
