@@ -103,6 +103,192 @@
                 visits = parseInt(visits) + 1
             setCookie("counter", visits, now)
             document.write("<font class='word' size=2>访问量👋：" + visits + "</font>")
+            //
+// Animate 7x5 pixel letters with random colors for each cell
+//
+// This would work for any word on the ".word" element, as long as there is a "letter definition" for each letter of the word (currently only for the letters in "bazinga")
+
+// Settings
+const lettersDefinitions = {
+  a: [
+    0, 0, 1, 0, 0,
+    0, 1, 0, 1, 0,
+    1, 0, 0, 0, 1,
+    1, 1, 1, 1, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+  ],
+  b: [
+    1, 1, 1, 1, 0,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 1, 1, 0,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 1, 1, 0,
+  ],
+  g: [
+    0, 1, 1, 1, 0,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 0,
+    1, 0, 0, 0, 0,
+    1, 0, 1, 1, 1,
+    1, 0, 0, 0, 1,
+    0, 1, 1, 1, 0,
+  ],
+  i: [
+    0, 1, 1, 1, 0,
+    0, 0, 1, 0, 0,
+    0, 0, 1, 0, 0,
+    0, 0, 1, 0, 0,
+    0, 0, 1, 0, 0,
+    0, 0, 1, 0, 0,
+    0, 1, 1, 1, 0,
+  ],
+  n: [
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 0, 0, 1,
+    1, 0, 1, 0, 1,
+    1, 0, 0, 1, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+  ],
+  z: [
+    1, 1, 1, 1, 1,
+    0, 0, 0, 0, 1,
+    0, 0, 0, 1, 0,
+    0, 0, 1, 0, 0,
+    0, 1, 0, 0, 0,
+    1, 0, 0, 0, 0,
+    1, 1, 1, 1, 1,
+  ],
+	u: [
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 1, 1, 1,
+  ],
+	m: [
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 1, 0, 1, 1,
+    1, 0, 1, 0, 1,
+    1, 0, 1, 0, 1,
+    1, 0, 0, 0, 1,
+    1, 0, 0, 0, 1,
+  ],
+}
+const cellSettings = {
+  height: 7,
+  width: 5,
+}
+const colors = [
+  '#f44336',
+  '#e91e63',
+  '#9c27b0',
+  '#673ab7',
+  '#3f51b5',
+  '#2196f3',
+  '#03a9f4',
+  '#00bcd4',
+  '#009688',
+  '#4caf50',
+  '#8bc34a',
+  '#cddc39',
+  '#ffeb3b',
+  '#ffc107',
+  '#ff9800',
+  '#ff5722',
+  '#795548',
+  '#9e9e9e',
+  '#607d8b'
+]
+
+// DOM Elements
+const wordEl = document.querySelector('.word');
+
+// constants
+const word = wordEl.textContent.trim().toLowerCase();
+const letters = word.split('');
+const cellsPerLetter = cellSettings.width * cellSettings.height;
+
+// Start animation
+function initAnimation() {
+  wordEl.textContent = '';
+  populate();
+}
+
+// Create each word letter (with correct content)
+function populate() {
+  letters.forEach((letter) => {
+    letterEl = createLetter(letter);
+    wordEl.appendChild(letterEl);
+  });
+}
+
+// Create a single letter (with grid)
+function createLetter(letter) {
+  const letterEl = document.createElement('span');
+  letterEl.classList.add('letter');
+  letterEl.grid = createLetterGrid(letter, letterEl);
+  return letterEl;
+}
+
+// Create a letter grid (with cell instances)
+function createLetterGrid(letter, letterEl) {
+  for (let i = 0; i < cellsPerLetter; i ++) {
+    const cellEl = document.createElement('span');
+    cellEl.classList.add('cell');
+    cellEl.cell = new Cell(cellEl, lettersDefinitions[letter][i] === 1);
+    letterEl.appendChild(cellEl);
+  }
+  return;
+}
+
+// Cell which changes background color randomly and random intervals
+class Cell {
+  // Constants
+  minUpdateInterval = 250;
+  maxUpdateInterval = 1000;
+  
+  constructor(cellEl, hasColor) {
+    this.cellEl = cellEl;
+    this.hasColor = hasColor;
+        
+    this.addColor();
+  }
+  
+  // Change cell color
+  addColor() {
+    this.cellEl.style.backgroundColor = this.hasColor
+      ? this.getRandomColor()
+      : 'transparent';
+    
+    // Change color again at a random interval
+    setTimeout(this.addColor.bind(this), this.generateUpdateInterval());
+  }
+  
+  // Get a random color from the colors array
+  getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+  
+  // Generate a random interval
+  generateUpdateInterval() {
+    const difference = this.maxUpdateInterval - this.minUpdateInterval;
+    let randomNumber = Math.random();
+    randomNumber = Math.floor(randomNumber * difference);
+    randomNumber = randomNumber + this.minUpdateInterval;
+    return randomNumber;
+  }
+}
+
+initAnimation();
             
 
         </script>
