@@ -11,4 +11,5 @@
 平衡二叉树 左右子节点的度数不超过1,
 [!faq]+ 平衡二叉树添加元素的过程中出现了不平衡怎么解决
 左左：右旋 右右：左旋 左右：找到问题子树，将其左旋，然后将根树进行右旋 右左：找到问题子树，将其右旋，然后将根树进行左旋 红黑树 优点：增删改查性能都很好
-规则 根节点必须是黑色，每一个节点是红色或者黑色 每一个节点没有子节点或者父节点，就将其设置为黑色的Nil（大致就是null） 红色节点的子节点必须是黑色，不能出现两个红色父子节点相连的情况 每一个节点，从该节点到所有子节点的简单路径上的黑色节点数是相同的</description></item></channel></rss>
+规则 根节点必须是黑色，每一个节点是红色或者黑色 每一个节点没有子节点或者父节点，就将其设置为黑色的Nil（大致就是null） 红色节点的子节点必须是黑色，不能出现两个红色父子节点相连的情况 每一个节点，从该节点到所有子节点的简单路径上的黑色节点数是相同的</description></item><item><title>3205-日志技术</title><link>https://ob.tianzhongs.ml/3205-%E6%97%A5%E5%BF%97%E6%8A%80%E6%9C%AF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/3205-%E6%97%A5%E5%BF%97%E6%8A%80%E6%9C%AF/</guid><description>3205-日志技术 常用的日志规范 日志规范一般是一些接口，常用的有
+Commons Logging Simple Logging facade for Java 常用的日志框架 Log4j Logback(性能好) Logback日志框架 组成部分 由三部分组成</description></item></channel></rss>
