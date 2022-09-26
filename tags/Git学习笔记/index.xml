@@ -3,4 +3,7 @@
 git reflog 查看操作历史，用来查看自己是否成功回退</description></item><item><title>005.代码合并的不同方式</title><link>https://ob.tianzhongs.ml/005.%E4%BB%A3%E7%A0%81%E5%90%88%E5%B9%B6%E7%9A%84%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/005.%E4%BB%A3%E7%A0%81%E5%90%88%E5%B9%B6%E7%9A%84%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F/</guid><description>005.代码合并的不同方式 强制推送 git push --force origin master
 删除主机分支 git push origin --delete master
 下载远程仓库与本地合并 git pull 命令用于从远程获取代码并合并本地的版本。
+1 git pull &amp;lt;远程主机名&amp;gt; &amp;lt;远程分支名&amp;gt;:&amp;lt;本地分支名&amp;gt; eg:git pull origin master</description></item><item><title>006.克隆仓库</title><link>https://ob.tianzhongs.ml/006.%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/006.%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93/</guid><description>006.克隆仓库 强制推送 git push --force origin master
+删除主机分支 git push origin --delete master
+下载远程仓库与本地合并 git pull 命令用于从远程获取代码并合并本地的版本。
 1 git pull &amp;lt;远程主机名&amp;gt; &amp;lt;远程分支名&amp;gt;:&amp;lt;本地分支名&amp;gt; eg:git pull origin master</description></item></channel></rss>
