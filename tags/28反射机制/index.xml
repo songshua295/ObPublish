@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>28反射机制 on</title><link>https://ob.tianzhongs.ml/tags/28%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</link><description>Recent content in 28反射机制 on</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://ob.tianzhongs.ml/tags/28%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>反射机制</title><link>https://ob.tianzhongs.ml/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ob.tianzhongs.ml/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</guid><description>反射机制 反射机制 Created: August 8, 2022 9:23 PM Date: August 8, 2022 类别: 反射机制
+包类：java.lang.reflect.*
+作用：操作字节码文件
+相关的重要类 java.lang.Class 代表整个字节码，整个类型 java.</description></item></channel></rss>
