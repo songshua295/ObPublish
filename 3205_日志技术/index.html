@@ -1,0 +1,204 @@
+<!doctype html><html lang=en><head><script async defer data-website-id=08a754c4-6690-46d7-bb80-8ff93cfa232f src=https://umami.oldwinter.top/umami.js></script><meta charset=utf-8><meta name=description content="3205-日志技术 常用的日志规范 日志规范一般是一些接口，常用的有
+ Commons Logging Simple Logging facade for Java  常用的日志框架  Log4j Logback(性能好)  Logback日志框架 组成部分 由三部分组成"><title>3205-日志技术</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://ob.tianzhongs.ml//icon.png><link href=https://ob.tianzhongs.ml/styles.b3e1e36b0403ac565c9392b3e23ef3b6.min.css rel=stylesheet><link href=https://ob.tianzhongs.ml/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://ob.tianzhongs.ml/js/darkmode.39c2c88b3447f5b3d88347763905ade7.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://ob.tianzhongs.ml/js/popover.abe6a51cc7138c5dff00f151dd627ad1.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://ob.tianzhongs.ml/",fetchData=Promise.all([fetch("https://ob.tianzhongs.ml/indices/linkIndex.9422daa21375b30f93b95460c4f45afa.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://ob.tianzhongs.ml/indices/contentIndex.d96b2d45457ebc8b2fade46121ee0016.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://ob.tianzhongs.ml",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://ob.tianzhongs.ml",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-11MD77L81V"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-11MD77L81V",{anonymize_ip:!1})}</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=search placeholder=支持标题及全文搜索...><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://ob.tianzhongs.ml/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://ob.tianzhongs.ml/>🌿知识花园🌸</a></h1><div class=spacer></div><div id=search-icon><p>search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>3205-日志技术</h1><p class=meta>最近编辑于
+Sep 20, 2022</p><ul class=tags><li><a href=https://ob.tianzhongs.ml/tags/32u%E8%A1%A5%E5%85%85/>32u补充</a></li></ul><aside class=mainTOC><details><summary>目录</summary><nav id=TableOfContents><ol><li><a href=#常用的日志规范>常用的日志规范</a></li><li><a href=#常用的日志框架>常用的日志框架</a></li><li><a href=#logback日志框架>Logback日志框架</a><ol><li><a href=#组成部分>组成部分</a></li><li><a href=#基本使用>基本使用</a></li><li><a href=#例子>例子</a></li><li><a href=#日志级别>日志级别</a></li><li><a href=#日志配置文件模板>日志配置文件模板</a></li></ol></li></ol></nav></details></aside><a href=#3205-日志技术><h1 id=3205-日志技术><span class=hanchor arialabel=Anchor># </span>3205-日志技术</h1></a><a href=#常用的日志规范><h2 id=常用的日志规范><span class=hanchor arialabel=Anchor># </span>常用的日志规范</h2></a><p>日志规范一般是一些接口，常用的有</p><ol><li>Commons Logging</li><li>Simple Logging facade for Java</li></ol><a href=#常用的日志框架><h2 id=常用的日志框架><span class=hanchor arialabel=Anchor># </span>常用的日志框架</h2></a><ol><li>Log4j</li><li>Logback(<strong>性能好</strong>)</li></ol><a href=#logback日志框架><h2 id=logback日志框架><span class=hanchor arialabel=Anchor># </span>Logback日志框架</h2></a><a href=#组成部分><h3 id=组成部分><span class=hanchor arialabel=Anchor># </span>组成部分</h3></a><p>由三部分组成</p><ol><li><code>logback-core</code>:为其余两个模块建立基础</li><li><code>logback-classic</code>:log4j的改良，同时完整实现了slf4j API</li><li><code>logback-access</code>:与Tomcat与Jetty等容器集成，<strong>提供http访问日志功能</strong></li></ol><a href=#基本使用><h3 id=基本使用><span class=hanchor arialabel=Anchor># </span>基本使用</h3></a><p>官网：https://logback.qos.ch/manual/index.html</p><ol><li>导入jar包到项目中，添加项目依赖（右击，选择<code>Add as Library</code>）<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl>	<span class=n>logback</span><span class=o>-</span><span class=n>classic</span><span class=o>-</span><span class=n>1</span><span class=o>.</span><span class=na>2</span><span class=o>.</span><span class=na>3</span><span class=o>.</span><span class=na>jar</span>
+</span></span><span class=line><span class=cl>	<span class=n>logback</span><span class=o>-</span><span class=n>core</span><span class=o>-</span><span class=n>1</span><span class=o>.</span><span class=na>2</span><span class=o>.</span><span class=na>3</span><span class=o>.</span><span class=na>jar</span>
+</span></span><span class=line><span class=cl>	<span class=n>slf4j</span><span class=o>-</span><span class=n>api</span><span class=o>-</span><span class=n>1</span><span class=o>.</span><span class=na>7</span><span class=o>.</span><span class=na>26</span><span class=o>.</span><span class=na>jar</span>
+</span></span></code></pre></td></tr></table></div></div>``</li><li>将Logback的核心配置文件<code>logback.xml</code>拷贝到<code>src</code>目录下</li><li>创建Logback的日志对象</li><li>使用日志对象Logger调用方法输出日志信息（根据配置信息的设定进行输出）</li></ol><a href=#例子><h3 id=例子><span class=hanchor arialabel=Anchor># </span>例子</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=o>&lt;?</span><span class=n>xml</span> <span class=n>version</span><span class=o>=</span><span class=s>&#34;1.0&#34;</span> <span class=n>encoding</span><span class=o>=</span><span class=s>&#34;UTF-8&#34;</span><span class=o>?&gt;</span>  
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>configuration</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;!--</span>  
+</span></span><span class=line><span class=cl>        <span class=n>CONSOLE</span> <span class=err>：</span><span class=n>表示当前的日志信息是可以输出到控制台的</span><span class=err>。</span>  
+</span></span><span class=line><span class=cl>    <span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>appender</span> <span class=n>name</span><span class=o>=</span><span class=s>&#34;CONSOLE&#34;</span> <span class=n>class</span><span class=o>=</span><span class=s>&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;!--</span><span class=n>输出流对象</span> <span class=n>默认</span> <span class=n>System</span><span class=o>.</span><span class=na>out</span> <span class=n>改为</span> <span class=n>System</span><span class=o>.</span><span class=na>err</span><span class=o>--&gt;</span>        <span class=o>&lt;</span><span class=n>target</span><span class=o>&gt;</span><span class=n>System</span><span class=o>.</span><span class=na>out</span><span class=o>&lt;/</span><span class=n>target</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>encoder</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;!--</span><span class=n>格式化输出</span><span class=err>：</span><span class=o>%</span><span class=n>d表示日期</span><span class=err>，</span><span class=o>%</span><span class=n>thread表示线程名</span><span class=err>，</span><span class=o>%-</span><span class=n>5level</span><span class=err>：</span><span class=n>级别从左显示5个字符宽度</span>  
+</span></span><span class=line><span class=cl>                <span class=o>%</span><span class=n>msg</span><span class=err>：</span><span class=n>日志消息</span><span class=err>，</span><span class=o>%</span><span class=n>n是换行符</span><span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>pattern</span><span class=o>&gt;%</span><span class=n>d</span><span class=o>{</span><span class=n>yyyy</span><span class=o>-</span><span class=n>MM</span><span class=o>-</span><span class=n>dd</span> <span class=n>HH</span><span class=o>:</span><span class=n>mm</span><span class=o>:</span><span class=n>ss</span><span class=o>.</span><span class=na>SSS</span><span class=o>}</span> <span class=o>[%-</span><span class=n>5level</span><span class=o>]</span>  <span class=o>%</span><span class=n>c</span> <span class=o>[%</span><span class=n>thread</span><span class=o>]</span> <span class=o>:</span> <span class=o>%</span><span class=n>msg</span><span class=o>%</span><span class=n>n</span><span class=o>&lt;/</span><span class=n>pattern</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;/</span><span class=n>encoder</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;/</span><span class=n>appender</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;!--</span> <span class=n>File是输出的方向通向文件的</span> <span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>appender</span> <span class=n>name</span><span class=o>=</span><span class=s>&#34;FILE&#34;</span> <span class=n>class</span><span class=o>=</span><span class=s>&#34;ch.qos.logback.core.rolling.RollingFileAppender&#34;</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>encoder</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>pattern</span><span class=o>&gt;%</span><span class=n>d</span><span class=o>{</span><span class=n>yyyy</span><span class=o>-</span><span class=n>MM</span><span class=o>-</span><span class=n>dd</span> <span class=n>HH</span><span class=o>:</span><span class=n>mm</span><span class=o>:</span><span class=n>ss</span><span class=o>.</span><span class=na>SSS</span><span class=o>}</span> <span class=o>[%</span><span class=n>thread</span><span class=o>]</span> <span class=o>%-</span><span class=n>5level</span> <span class=o>%</span><span class=n>logger</span><span class=o>{</span><span class=n>36</span><span class=o>}</span> <span class=o>-</span> <span class=o>%</span><span class=n>msg</span><span class=o>%</span><span class=n>n</span><span class=o>&lt;/</span><span class=n>pattern</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>charset</span><span class=o>&gt;</span><span class=n>utf</span><span class=o>-</span><span class=n>8</span><span class=o>&lt;/</span><span class=n>charset</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;/</span><span class=n>encoder</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;!--</span><span class=n>日志输出路径</span><span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>file</span><span class=o>&gt;</span><span class=n>C</span><span class=o>:/</span><span class=n>code</span><span class=o>/</span><span class=n>itheima</span><span class=o>-</span><span class=n>data</span><span class=o>.</span><span class=na>log</span><span class=o>&lt;/</span><span class=n>file</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;!--</span><span class=n>指定日志文件拆分和压缩规则</span><span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>rollingPolicy</span>  
+</span></span><span class=line><span class=cl>                <span class=n>class</span><span class=o>=</span><span class=s>&#34;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&#34;</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;!--</span><span class=n>通过指定压缩文件名称</span><span class=err>，</span><span class=n>来确定分割文件方式</span><span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>fileNamePattern</span><span class=o>&gt;</span><span class=n>C</span><span class=o>:/</span><span class=n>code</span><span class=o>/</span><span class=n>itheima</span><span class=o>-</span><span class=n>data2</span><span class=o>-%</span><span class=n>d</span><span class=o>{</span><span class=n>yyyy</span><span class=o>-</span><span class=n>MMdd</span><span class=o>}.</span><span class=na>log</span><span class=o>%</span><span class=n>i</span><span class=o>.</span><span class=na>gz</span><span class=o>&lt;/</span><span class=n>fileNamePattern</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;!--</span><span class=n>文件拆分大小</span><span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>maxFileSize</span><span class=o>&gt;</span><span class=n>1MB</span><span class=o>&lt;/</span><span class=n>maxFileSize</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;/</span><span class=n>rollingPolicy</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;/</span><span class=n>appender</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;!--</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>level</span><span class=o>:</span><span class=n>用来设置打印级别</span><span class=err>，</span><span class=n>大小写无关</span><span class=err>：</span><span class=n>TRACE</span><span class=o>,</span> <span class=n>DEBUG</span><span class=o>,</span> <span class=n>INFO</span><span class=o>,</span> <span class=n>WARN</span><span class=o>,</span> <span class=n>ERROR</span><span class=o>,</span> <span class=n>ALL</span> <span class=n>和</span> <span class=n>OFF</span>   <span class=err>，</span> <span class=n>默认debug</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>root</span><span class=o>&gt;</span><span class=n>可以包含零个或多个</span><span class=o>&lt;</span><span class=n>appender</span><span class=o>-</span><span class=n>ref</span><span class=o>&gt;</span><span class=n>元素</span><span class=err>，</span><span class=n>标识这个输出位置将会被本日志级别控制</span><span class=err>。</span>  
+</span></span><span class=line><span class=cl>    <span class=o>--&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>root</span> <span class=n>level</span><span class=o>=</span><span class=s>&#34;ALL&#34;</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>appender</span><span class=o>-</span><span class=n>ref</span> <span class=n>ref</span><span class=o>=</span><span class=s>&#34;CONSOLE&#34;</span><span class=o>/&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>appender</span><span class=o>-</span><span class=n>ref</span> <span class=n>ref</span><span class=o>=</span><span class=s>&#34;FILE&#34;</span> <span class=o>/&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=o>&lt;/</span><span class=n>root</span><span class=o>&gt;</span>  
+</span></span><span class=line><span class=cl><span class=o>&lt;/</span><span class=n>configuration</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>2022</span><span class=o>-</span><span class=n>09</span><span class=o>-</span><span class=n>20</span> <span class=n>19</span><span class=o>:</span><span class=n>01</span><span class=o>:</span><span class=n>18</span><span class=o>.</span><span class=na>601</span> <span class=o>[</span><span class=n>DEBUG</span><span class=o>]</span>  <span class=n>Test</span><span class=o>.</span><span class=na>class</span> <span class=o>[</span><span class=n>main</span><span class=o>]</span> <span class=o>:</span> <span class=n>日志打印</span>
+</span></span><span class=line><span class=cl><span class=n>2022</span><span class=o>-</span><span class=n>09</span><span class=o>-</span><span class=n>20</span> <span class=n>19</span><span class=o>:</span><span class=n>01</span><span class=o>:</span><span class=n>18</span><span class=o>.</span><span class=na>603</span> <span class=o>[</span><span class=n>INFO</span> <span class=o>]</span>  <span class=n>Test</span><span class=o>.</span><span class=na>class</span> <span class=o>[</span><span class=n>main</span><span class=o>]</span> <span class=o>:</span> <span class=n>INFO进行打印</span>
+</span></span><span class=line><span class=cl><span class=n>2022</span><span class=o>-</span><span class=n>09</span><span class=o>-</span><span class=n>20</span> <span class=n>19</span><span class=o>:</span><span class=n>01</span><span class=o>:</span><span class=n>18</span><span class=o>.</span><span class=na>604</span> <span class=o>[</span><span class=n>TRACE</span><span class=o>]</span>  <span class=n>Test</span><span class=o>.</span><span class=na>class</span> <span class=o>[</span><span class=n>main</span><span class=o>]</span> <span class=o>:</span> <span class=n>a</span><span class=o>=</span><span class=n>23</span>
+</span></span><span class=line><span class=cl><span class=n>2022</span><span class=o>-</span><span class=n>09</span><span class=o>-</span><span class=n>20</span> <span class=n>19</span><span class=o>:</span><span class=n>01</span><span class=o>:</span><span class=n>18</span><span class=o>.</span><span class=na>604</span> <span class=o>[</span><span class=n>TRACE</span><span class=o>]</span>  <span class=n>Test</span><span class=o>.</span><span class=na>class</span> <span class=o>[</span><span class=n>main</span><span class=o>]</span> <span class=o>:</span> <span class=n>b</span><span class=o>=</span><span class=n>0</span>
+</span></span><span class=line><span class=cl><span class=n>2022</span><span class=o>-</span><span class=n>09</span><span class=o>-</span><span class=n>20</span> <span class=n>19</span><span class=o>:</span><span class=n>01</span><span class=o>:</span><span class=n>18</span><span class=o>.</span><span class=na>604</span> <span class=o>[</span><span class=n>ERROR</span><span class=o>]</span>  <span class=n>Test</span><span class=o>.</span><span class=na>class</span> <span class=o>[</span><span class=n>main</span><span class=o>]</span> <span class=o>:</span> <span class=n>功能异常java</span><span class=o>.</span><span class=na>lang</span><span class=o>.</span><span class=na>ArithmeticException</span><span class=o>:</span> <span class=o>/</span> <span class=n>by</span> <span class=n>zero</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#日志级别><h3 id=日志级别><span class=hanchor arialabel=Anchor># </span>日志级别</h3></a><p>设定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=nt>&lt;root</span> <span class=na>level=</span><span class=s>&#34;INFO&#34;</span><span class=nt>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>trace&lt;debug&lt;info&lt;warn&lt;error</p><p>默认是日志级别是：<code>Debug</code>
+设置级别：用于控制日志级别中的哪些是可以输出的，<strong>大于或等于设定日志级别的才可以输出</strong>
+其中<code>ALL</code>和<code>OFF</code>是打开和关闭打印所有日志信息</p><a href=#日志配置文件模板><h3 id=日志配置文件模板><span class=hanchor arialabel=Anchor># </span>日志配置文件模板</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>  
+</span></span><span class=line><span class=cl><span class=nt>&lt;configuration&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--  
+</span></span></span><span class=line><span class=cl><span class=c>        CONSOLE ：表示当前的日志信息是可以输出到控制台的。  
+</span></span></span><span class=line><span class=cl><span class=c>    --&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;appender</span> <span class=na>name=</span><span class=s>&#34;CONSOLE&#34;</span> <span class=na>class=</span><span class=s>&#34;ch.qos.logback.core.ConsoleAppender&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!--输出流对象 默认 System.out 改为 System.err--&gt;</span>        <span class=nt>&lt;target&gt;</span>System.out<span class=nt>&lt;/target&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;encoder&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=c>&lt;!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度  
+</span></span></span><span class=line><span class=cl><span class=c>                %msg：日志消息，%n是换行符--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;pattern&gt;</span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level]  %c [%thread] : %msg%n<span class=nt>&lt;/pattern&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/encoder&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/appender&gt;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!-- File是输出的方向通向文件的 --&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;appender</span> <span class=na>name=</span><span class=s>&#34;FILE&#34;</span> <span class=na>class=</span><span class=s>&#34;ch.qos.logback.core.rolling.RollingFileAppender&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;encoder&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;pattern&gt;</span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n<span class=nt>&lt;/pattern&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;charset&gt;</span>utf-8<span class=nt>&lt;/charset&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/encoder&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!--日志输出路径--&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;file&gt;</span>C:/code/itheima-data.log<span class=nt>&lt;/file&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=c>&lt;!--指定日志文件拆分和压缩规则--&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;rollingPolicy</span>  
+</span></span><span class=line><span class=cl>                <span class=na>class=</span><span class=s>&#34;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=c>&lt;!--通过指定压缩文件名称，来确定分割文件方式--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;fileNamePattern&gt;</span>C:/code/itheima-data2-%d{yyyy-MMdd}.log%i.gz<span class=nt>&lt;/fileNamePattern&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=c>&lt;!--文件拆分大小--&gt;</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&lt;maxFileSize&gt;</span>1MB<span class=nt>&lt;/maxFileSize&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;/rollingPolicy&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/appender&gt;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=c>&lt;!--  
+</span></span></span><span class=line><span class=cl><span class=c>  
+</span></span></span><span class=line><span class=cl><span class=c>    level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF   ， 默认debug  
+</span></span></span><span class=line><span class=cl><span class=c>    &lt;root&gt;可以包含零个或多个&lt;appender-ref&gt;元素，标识这个输出位置将会被本日志级别控制。  
+</span></span></span><span class=line><span class=cl><span class=c>    --&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;root</span> <span class=na>level=</span><span class=s>&#34;ALL&#34;</span><span class=nt>&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;appender-ref</span> <span class=na>ref=</span><span class=s>&#34;CONSOLE&#34;</span><span class=nt>/&gt;</span>  
+</span></span><span class=line><span class=cl>        <span class=nt>&lt;appender-ref</span> <span class=na>ref=</span><span class=s>&#34;FILE&#34;</span> <span class=nt>/&gt;</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&lt;/root&gt;</span>  
+</span></span><span class=line><span class=cl><span class=nt>&lt;/configuration&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>相关<a href=/%E9%A1%B9%E7%9B%AE3%E7%94%B5%E5%BD%B1%E7%A5%A8%E8%B4%AD%E7%A5%A8%E7%B3%BB%E7%BB%9F rel=noopener class=internal-link data-src=/%E9%A1%B9%E7%9B%AE3%E7%94%B5%E5%BD%B1%E7%A5%A8%E8%B4%AD%E7%A5%A8%E7%B3%BB%E7%BB%9F>【项目3】电影票购票系统</a></p></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>反向链接</h3><ul class=backlinks><li>未发现反向链接</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>内部链接关系图</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://ob.tianzhongs.ml/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><hr><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js></script><script src=alittlejs/md5.min.js></script><div id=gitalk-container></div><script>var gitalk=new Gitalk({clientID:"b3d1e82d398c36a4a587",clientSecret:"973b351e5ad4ff9ea6d93e7db3f431beef48dc2d",repo:"ObPublish",owner:"tianzhongs",admin:["Tianzhongs"],id:location.href,distractionFreeMode:!1});gitalk.render("gitalk-container")</script><center><script>var caution=!1,now,visits;function setCookie(e,t,n,s,o,a){var i=e+"="+escape(t)+(n?"; expires="+n.toGMTString():"")+(s?"; path="+s:"")+(o?"; domain="+o:"")+(a?"; secure":"");!caution||(e+"="+escape(t)).length<=4e3?document.cookie=i:confirm("Cookie exceeds 4KB and will be cut!")&&(document.cookie=i)}function getCookie(s){var e=s+"=",n,t=document.cookie.indexOf(e);return t==-1?null:(n=document.cookie.indexOf(";",t+e.length),n==-1&&(n=document.cookie.length),unescape(document.cookie.substring(t+e.length,n)))}function deleteCookie(e,t,n){getCookie(e)&&(document.cookie=e+"="+(t?"; path="+t:"")+(n?"; domain="+n:"")+"; expires=Thu, 01-Jan-70 00:00:01 GMT")}function fixDate(e){var n=new Date(0),t=n.getTime();t>0&&e.setTime(e.getTime()-t)}now=new Date,fixDate(now),now.setTime(now.getTime()+730*24*60*60*1e3),visits=getCookie("counter"),visits?visits=parseInt(visits)+1:visits=1,setCookie("counter",visits,now),document.write("<font size=2>👋访问量："+visits+"")</script></center></div></body></html>
