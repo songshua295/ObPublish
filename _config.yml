@@ -1,0 +1,16 @@
+# _config.yml
+title: "Foam"
+# All the plugins we will be installing now that we won't be using GitHub Pages
+plugins:
+  - jekyll-katex  # optional
+  - jekyll-default-layout
+  - jekyll-relative-links
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+  - jekyll-optional-front-matter
+# The default Jekyll theme we will be using
+theme: jekyll-theme-primer
+# The GitHub repository that we are hosting our foam workspace from
+repository: user/repo
+# Generate permalinks in format specified in: https://jekyllrb.com/docs/permalinks/#built-in-formats
+permalink: pretty
