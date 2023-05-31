@@ -1,4 +1,4 @@
-baseURL = "https://ob.tianzhongs.ml/"  #需要进行配置成你的网站域名，此处配置了才可以使用搜索功能
+baseURL = "https://ob.doingnothing.ml/"  #需要进行配置成你的网站域名，此处配置了才可以使用搜索功能
 languageCode = "zh-cn" #此处可选，在i18n文件中选择 中文
 googleAnalytics = "G-11MD77L81V"
 relativeURLs = false
