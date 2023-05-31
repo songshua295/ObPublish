@@ -1,0 +1,393 @@
+<!doctype html><html lang=en><head><script async defer data-website-id=08a754c4-6690-46d7-bb80-8ff93cfa232f src=https://umami.oldwinter.top/umami.js></script><meta charset=utf-8><meta name=description content="面向对象三大特征  封装 继承 多态  封装 是为了数据安全，避免外部随意访问 封装方法：在创建构造函数（__init__)的时候，使用self.__属性名对其进行封装 封装之后，可以创建实例方法来对其属性进行操作，也可以使用_类名__属性名来对其进行强行访问
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  class Student: def __init__(self,name,age): self."><title>python.12 对象的具体使用</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://ob.tianzhongs.ml//icon.png><link href=https://ob.tianzhongs.ml/styles.b3e1e36b0403ac565c9392b3e23ef3b6.min.css rel=stylesheet><link href=https://ob.tianzhongs.ml/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://ob.tianzhongs.ml/js/darkmode.39c2c88b3447f5b3d88347763905ade7.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://ob.tianzhongs.ml/js/popover.abe6a51cc7138c5dff00f151dd627ad1.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://ob.tianzhongs.ml/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://ob.tianzhongs.ml/",fetchData=Promise.all([fetch("https://ob.tianzhongs.ml/indices/linkIndex.67c62888fa0decd2f420eb91b0bcf00d.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://ob.tianzhongs.ml/indices/contentIndex.4117733c35007595a6856e3245ac1c18.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addCollapsibleCallouts(),initPopover("https://ob.tianzhongs.ml",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://ob.tianzhongs.ml",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script>window.Million={navigate:e=>window.location.href=e,prefetch:()=>{}},window.addEventListener("DOMContentLoaded",()=>{init(),render()})</script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-11MD77L81V"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-11MD77L81V",{anonymize_ip:!1})}</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=search placeholder=支持标题及全文搜索...><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://ob.tianzhongs.ml/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://ob.tianzhongs.ml/>🌿知识花园🌸</a></h1><div class=spacer></div><div id=search-icon><p>search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>python.12 对象的具体使用</h1><p class=meta>最近编辑于
+Unknown</p><ul class=tags></ul><aside class=mainTOC><details><summary>目录</summary><nav id=TableOfContents><ol><li><a href=#面向对象三大特征>面向对象三大特征</a></li><li><a href=#封装>封装</a></li><li><a href=#继承>继承</a><ol><li><a href=#定义方法>定义方法</a></li></ol></li><li><a href=#方法重写>方法重写</a></li><li><a href=#object类>Object类</a></li><li><a href=#多态>多态</a></li><li><a href=#特殊方法和特殊属性>特殊方法和特殊属性</a><ol><li><a href=#__new__-和-__init__><code>__new__</code> 和 <code>__init__</code></a></li></ol></li><li><a href=#浅拷贝与深拷贝>浅拷贝与深拷贝</a><ol><li><a href=#浅拷贝>浅拷贝</a></li><li><a href=#深拷贝>深拷贝</a></li></ol></li></ol></nav></details></aside><a href=#面向对象三大特征><h2 id=面向对象三大特征><span class=hanchor arialabel=Anchor># </span>面向对象三大特征</h2></a><ol><li>封装</li><li>继承</li><li>多态</li></ol><a href=#封装><h2 id=封装><span class=hanchor arialabel=Anchor># </span>封装</h2></a><p>是为了数据安全，避免外部随意访问
+封装方法：在创建构造函数（<code>__init__</code>)的时候，使用<code>self.__属性名</code>对其进行封装
+封装之后，可以创建实例方法来对其属性进行操作，也可以使用<code>_类名__属性名</code>来对其进行强行访问</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Student</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>__age</span><span class=o>=</span><span class=n>age</span> <span class=c1>#不希望被外部访问，就封装该属性</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 使用实例访问去获取属性</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>getage</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>__age</span>
+</span></span><span class=line><span class=cl><span class=n>s1</span><span class=o>=</span><span class=n>Student</span><span class=p>(</span><span class=s2>&#34;张三&#34;</span><span class=p>,</span><span class=mi>23</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>s1</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># print(s1.__age) #无法直接访问</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>s1</span><span class=o>.</span><span class=n>getage</span><span class=p>())</span> <span class=c1>#通过实例访问去访问</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#如果没有实例访问，硬要去访问</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>dir</span><span class=p>(</span><span class=n>s1</span><span class=p>))</span> <span class=c1>#获取s1实例对象的所有属性</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>s1</span><span class=o>.</span><span class=n>_Student__age</span><span class=p>)</span> <span class=c1>#使用_类名__属性，还是能够访问</span>
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>张三
+</span></span><span class=line><span class=cl>23
+</span></span><span class=line><span class=cl>[&#39;_Student__age&#39;, &#39;__class__&#39;, &#39;__delattr__&#39;, 
+</span></span><span class=line><span class=cl>&#39;__dict__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__init_subclass__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__module__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;__weakref__&#39;, &#39;getage&#39;, &#39;name&#39;]
+</span></span><span class=line><span class=cl>23
+</span></span></code></pre></td></tr></table></div></div><a href=#继承><h2 id=继承><span class=hanchor arialabel=Anchor># </span>继承</h2></a><p>python中支持多继承</p><a href=#定义方法><h3 id=定义方法><span class=hanchor arialabel=Anchor># </span>定义方法</h3></a><p>创建父类之后，使用<code>class 子类(父类)</code>的方法定义子类
+如果子类需要使用父类的构造方法，可以使用<code>super().__init__(属性名称列表)</code> （列表中不包括self参数）来进行调用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Person</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>age</span><span class=o>=</span><span class=n>age</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建子类</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Student</span><span class=p>(</span><span class=n>Person</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>,</span><span class=n>stuNo</span><span class=o>=</span><span class=mi>12</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>)</span> <span class=c1>#使用父类的构造方法</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 实例方法</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>info</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=si>}</span><span class=s2>是学生&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 实例化子类对象</span>
+</span></span><span class=line><span class=cl><span class=n>s1</span><span class=o>=</span><span class=n>Student</span><span class=p>(</span><span class=s2>&#34;张三&#34;</span><span class=p>,</span><span class=mi>32</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>s1</span><span class=o>.</span><span class=n>info</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>s1</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#方法重写><h2 id=方法重写><span class=hanchor arialabel=Anchor># </span>方法重写</h2></a><p>如果父类的方法对子类不适用，或者子类不希望使用和父类方法同样的效果，可以对父类的方法进行重写。
+如果在子类方法重写的过程中，希望使用一部分父类的方法，可以使用<code>super().父类方法()</code>
+eg</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>class Person:
+</span></span><span class=line><span class=cl>    def __init__(self,name,age):
+</span></span><span class=line><span class=cl>        self.name=name
+</span></span><span class=line><span class=cl>        self.age=age
+</span></span><span class=line><span class=cl>    def info(self):
+</span></span><span class=line><span class=cl>        print(f&#34;姓名：{self.name} 年龄：{self.age}&#34;)
+</span></span><span class=line><span class=cl># 创建子类
+</span></span><span class=line><span class=cl>class Student(Person):
+</span></span><span class=line><span class=cl>    def __init__(self,name,age,stuNo=12):
+</span></span><span class=line><span class=cl>        super().__init__(name,age) #使用父类的构造方法
+</span></span><span class=line><span class=cl>    # 实例方法 重写
+</span></span><span class=line><span class=cl>    def info(self):
+</span></span><span class=line><span class=cl>        super().info()
+</span></span><span class=line><span class=cl>        print(f&#34;{self.name}是学生&#34;)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>p1=Person(&#34;张三&#34;,34)
+</span></span><span class=line><span class=cl>p1.info()
+</span></span><span class=line><span class=cl>print(&#34;==========&#34;)
+</span></span><span class=line><span class=cl>s1=Student(&#34;李四&#34;,123)
+</span></span><span class=line><span class=cl>s1.info()
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>姓名：张三 年龄：34
+</span></span><span class=line><span class=cl>==========
+</span></span><span class=line><span class=cl>姓名：李四 年龄：123
+</span></span><span class=line><span class=cl>李四是学生
+</span></span></code></pre></td></tr></table></div></div><a href=#object类><h2 id=object类><span class=hanchor arialabel=Anchor># </span>Object类</h2></a><p>所有类默认继承Object类
+内置函数<code>dir()</code>可以查看指定对象的所有属性（当对象属性封装之后，也可以查看器封装时候的对应属性，来强制进行访问）
+Object有一个<code>__str__</code>方法，用于返回描述对象的信息，<code>print</code>函数中就有它的影子，<code>__str__</code>类似于java中的<code>toString</code>方法，所以，一般对象都会重写<code>__str__</code>方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#默认继承Object类</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Person</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>age</span><span class=o>=</span><span class=n>age</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__str__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=p>(</span><span class=sa>f</span><span class=s2>&#34;我的名字是</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=n>p1</span><span class=o>=</span><span class=n>Person</span><span class=p>(</span><span class=s2>&#34;张三&#34;</span><span class=p>,</span><span class=mi>12</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>p1</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>我的名字是张三
+</span></span></code></pre></td></tr></table></div></div><a href=#多态><h2 id=多态><span class=hanchor arialabel=Anchor># </span>多态</h2></a><p>多态，就是即使不知道一个变量是什么类型的，仍然可以调用这个方法，在运行的过程中，根据这个变量引用的类型，动态决定调用那个对象的方法
+静态语言实现多态的三个条件
+1. 继承
+2. 方法重写
+3. 父类引用指向子类对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Animal</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;动物吃食物&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Dog</span><span class=p>(</span><span class=n>Animal</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;狗吃骨头&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Cat</span><span class=p>(</span><span class=n>Animal</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;猫吃鱼&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Animal</span><span class=p>()</span><span class=o>.</span><span class=n>eat</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>Dog</span><span class=p>()</span><span class=o>.</span><span class=n>eat</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>Cat</span><span class=p>()</span><span class=o>.</span><span class=n>eat</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>动物吃食物
+</span></span><span class=line><span class=cl>狗吃骨头
+</span></span><span class=line><span class=cl>猫吃鱼
+</span></span></code></pre></td></tr></table></div></div><a href=#特殊方法和特殊属性><h2 id=特殊方法和特殊属性><span class=hanchor arialabel=Anchor># </span>特殊方法和特殊属性</h2></a><p>特殊属性：<code>_dict _</code> 获得类对象或实例对象所绑定的所有属性和方法的字典
+特殊方法:
+1. <code>_len_</code>
+2. <code>__add__</code>（重写对象实例的+号）
+3. <code>_new_</code> 创建对象的方法，有点类似于java中的类静态方法方法，当创建对象的时候，就会自动调用这段代码块
+4. <code>_init_</code> 实例化对象的方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Animal</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;动物吃食物&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__add__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>other</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>+</span><span class=n>other</span><span class=o>.</span><span class=n>name</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Dog</span><span class=p>(</span><span class=n>Animal</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;狗吃骨头&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Cat</span><span class=p>(</span><span class=n>Animal</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;default&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>eat</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;猫吃鱼&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_len_</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>c1</span><span class=o>=</span><span class=n>Cat</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Animal</span><span class=o>.</span><span class=vm>__dict__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>c1</span><span class=o>.</span><span class=vm>__dict__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#_len_</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Cat</span><span class=o>.</span><span class=n>_len_</span><span class=p>(</span><span class=n>c1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#_add_</span>
+</span></span><span class=line><span class=cl><span class=n>c2</span><span class=o>=</span><span class=n>Cat</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>c3</span><span class=o>=</span><span class=n>Cat</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>c2</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;猫1&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>c3</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;猫2&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>c2</span><span class=o>+</span><span class=n>c3</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#__new__-和-__init__><h3 id=__new__-和-__init__><span class=hanchor arialabel=Anchor># </span><code>__new__</code> 和 <code>__init__</code></h3></a><p><code>__new__</code>类似于java中的实例初始化块，当创建对象的时候，会先执行<code>__new__</code>中的代码
+只有<code>__new__</code>返回了object对象的时候，<code>__init__</code>才会开始实例化对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Person</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span><span class=o>*</span><span class=n>args</span><span class=p>,</span><span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__new__被调用，cls的id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>obj</span><span class=o>=</span><span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__new__创建的对象object的id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=n>obj</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>obj</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>name</span><span class=p>,</span><span class=n>age</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__init__被调用，id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=o>=</span><span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>age</span><span class=o>=</span><span class=n>age</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;object这个类对象的id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=nb>object</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;Person这个类对象的id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=n>Person</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#实例对象</span>
+</span></span><span class=line><span class=cl><span class=n>p1</span><span class=o>=</span><span class=n>Person</span><span class=p>(</span><span class=s2>&#34;张三&#34;</span><span class=p>,</span><span class=mi>34</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>p2</span><span class=o>=</span><span class=n>Person</span><span class=p>(</span><span class=s2>&#34;张三&#34;</span><span class=p>,</span><span class=mi>34</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;p1的id为</span><span class=si>{</span><span class=nb>id</span><span class=p>(</span><span class=n>p1</span><span class=p>)</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>output</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>object这个类对象的id为140720106493824
+</span></span><span class=line><span class=cl>Person这个类对象的id为2567655866448
+</span></span><span class=line><span class=cl>__new__被调用，cls的id为2567655866448
+</span></span><span class=line><span class=cl>__new__创建的对象object的id为2567657930416     
+</span></span><span class=line><span class=cl>__init__被调用，id为2567657930416
+</span></span><span class=line><span class=cl>__new__被调用，cls的id为2567655866448
+</span></span><span class=line><span class=cl>__new__创建的对象object的id为2567657930320     
+</span></span><span class=line><span class=cl>__init__被调用，id为2567657930320
+</span></span><span class=line><span class=cl>p1的id为2567657930416
+</span></span></code></pre></td></tr></table></div></div><a href=#浅拷贝与深拷贝><h2 id=浅拷贝与深拷贝><span class=hanchor arialabel=Anchor># </span>浅拷贝与深拷贝</h2></a><a href=#浅拷贝><h3 id=浅拷贝><span class=hanchor arialabel=Anchor># </span>浅拷贝</h3></a><p>Python拷贝一般都是浅拷贝，拷贝时，对象包含的子对象内容不拷贝，因此，源对象与拷贝对象会引用同一个子对象。（拷贝的对象中子对象的引用）</p><a href=#深拷贝><h3 id=深拷贝><span class=hanchor arialabel=Anchor># </span>深拷贝</h3></a><p>deepcopy方法，在拷贝对象时候，对象包含的子对象也会被拷贝。</p><ul><li>两个的差别都是所拷贝的对象中存在的子对象是否拷贝，浅拷贝的子对象是公用同一个的，而深拷贝的子对象也会被拷贝一份。</li><li><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Computer</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>cpu</span><span class=p>,</span><span class=n>disk</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>cpu</span><span class=o>=</span><span class=n>cpu</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>disk</span><span class=o>=</span><span class=n>disk</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Disk</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>CPU</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl><span class=c1>#创建一个compouter</span>
+</span></span><span class=line><span class=cl><span class=n>disk1</span><span class=o>=</span><span class=n>Disk</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>cpu1</span><span class=o>=</span><span class=n>CPU</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>computer1</span><span class=o>=</span><span class=n>Computer</span><span class=p>(</span><span class=n>disk1</span><span class=p>,</span><span class=n>cpu1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;disk1&#34;</span><span class=p>,</span><span class=n>disk1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;cpu1&#34;</span><span class=p>,</span><span class=n>cpu1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;compouter1&#34;</span><span class=p>,</span><span class=n>computer1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#浅拷贝</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>copy</span>
+</span></span><span class=line><span class=cl><span class=n>computer2</span><span class=o>=</span><span class=n>copy</span><span class=o>.</span><span class=n>copy</span><span class=p>(</span><span class=n>computer1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;computer2&#34;</span><span class=p>,</span><span class=n>computer2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>computer2</span><span class=o>.</span><span class=n>cpu</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>computer2</span><span class=o>.</span><span class=n>disk</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>computer1</span><span class=o>.</span><span class=n>disk</span> <span class=ow>is</span> <span class=n>computer2</span><span class=o>.</span><span class=n>disk</span><span class=p>)</span> <span class=c1>#子对象没有拷贝，所以还是同一个子对象</span>
+</span></span><span class=line><span class=cl><span class=c1>#深拷贝</span>
+</span></span><span class=line><span class=cl><span class=n>computer3</span><span class=o>=</span><span class=n>copy</span><span class=o>.</span><span class=n>deepcopy</span><span class=p>(</span><span class=n>computer1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>computer3</span> <span class=ow>is</span> <span class=n>computer1</span><span class=p>,</span><span class=nb>id</span><span class=p>(</span><span class=n>computer3</span><span class=p>),</span><span class=nb>id</span><span class=p>(</span><span class=n>computer1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>computer1</span><span class=o>.</span><span class=n>cpu</span> <span class=ow>is</span> <span class=n>computer3</span><span class=p>)</span> <span class=c1>#子对象也被拷贝，所以内存地址和id也不同</span>
+</span></span></code></pre></td></tr></table></div></div>output:可以看到computer1和computer的对象地址不同，但是他们的子对象disk和cpu都是一样的，说明他们的浅拷贝的是子对象中的引用<div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>disk1 &lt;__main__.Disk object at 0x000002114636BFD0&gt;
+</span></span><span class=line><span class=cl>cpu1 &lt;__main__.CPU object at 0x000002114636BEE0&gt;
+</span></span><span class=line><span class=cl>compouter1 &lt;__main__.Computer object at 0x000002114636BEB0&gt;
+</span></span><span class=line><span class=cl>computer2 &lt;__main__.Computer object at 0x000002114636BDC0&gt;
+</span></span><span class=line><span class=cl>&lt;__main__.Disk object at 0x000002114636BFD0&gt;
+</span></span><span class=line><span class=cl>&lt;__main__.CPU object at 0x000002114636BEE0&gt;
+</span></span><span class=line><span class=cl>True
+</span></span><span class=line><span class=cl>False 2273215691648 2273215692464
+</span></span><span class=line><span class=cl>False
+</span></span></code></pre></td></tr></table></div></div></li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>反向链接</h3><ul class=backlinks><li>未发现反向链接</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>内部链接关系图</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://ob.tianzhongs.ml/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><hr><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css><script src=https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js></script><script src=alittlejs/md5.min.js></script><div id=gitalk-container></div><script>var gitalk=new Gitalk({clientID:"b3d1e82d398c36a4a587",clientSecret:"973b351e5ad4ff9ea6d93e7db3f431beef48dc2d",repo:"ObPublish",owner:"tianzhongs",admin:["Tianzhongs"],id:location.href,distractionFreeMode:!1});gitalk.render("gitalk-container")</script><center><script>var caution=!1,now,visits;function setCookie(e,t,n,s,o,a){var i=e+"="+escape(t)+(n?"; expires="+n.toGMTString():"")+(s?"; path="+s:"")+(o?"; domain="+o:"")+(a?"; secure":"");!caution||(e+"="+escape(t)).length<=4e3?document.cookie=i:confirm("Cookie exceeds 4KB and will be cut!")&&(document.cookie=i)}function getCookie(s){var e=s+"=",n,t=document.cookie.indexOf(e);return t==-1?null:(n=document.cookie.indexOf(";",t+e.length),n==-1&&(n=document.cookie.length),unescape(document.cookie.substring(t+e.length,n)))}function deleteCookie(e,t,n){getCookie(e)&&(document.cookie=e+"="+(t?"; path="+t:"")+(n?"; domain="+n:"")+"; expires=Thu, 01-Jan-70 00:00:01 GMT")}function fixDate(e){var n=new Date(0),t=n.getTime();t>0&&e.setTime(e.getTime()-t)}now=new Date,fixDate(now),now.setTime(now.getTime()+730*24*60*60*1e3),visits=getCookie("counter"),visits?visits=parseInt(visits)+1:visits=1,setCookie("counter",visits,now),document.write("<font size=2>👋访问量："+visits+"")</script></center></div></body></html>
