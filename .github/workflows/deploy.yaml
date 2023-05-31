@@ -56,4 +56,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: master  # deploying branch
-          cname: ob.tianzhongs.ml   #修改成你的域名
+          cname: ob.doingnothing.online   #修改成你的域名
